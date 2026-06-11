@@ -424,69 +424,6 @@
       </div>
     </section>
 
-    <!-- ===================== 6. LIEU & ACCÈS ===================== -->
-    <section class="efca-section" id="lieu" aria-labelledby="lieu-title">
-      <div class="efca-container">
-        <div class="efca-section__head efca-reveal">
-          <p class="efca-label">Lieu &amp; accès</p>
-          <h2 id="lieu-title">Plage des Dauphins, Mandelieu</h2>
-        </div>
-
-        <div class="efca-place">
-          <div class="efca-nap efca-reveal">
-            <!-- NAP AU PIXEL — identique fiche Google, footer et JSON-LD. Ne pas paraphraser. -->
-            <address>
-              <strong>Plage des Dauphins</strong>, Bd du Midi Louise Moreau<br>
-              06150 Mandelieu-la-Napoule<br>
-              <a class="efca-nap__phone" href="tel:+33635305067">06 35 30 50 67</a>
-            </address>
-            <p style="margin-top:1rem"><strong>Horaires :</strong> 9 h – 19 h (saison) <em>— à confirmer</em></p>
-            <p><strong>Accès :</strong> stationnement à proximité <em>— à préciser</em></p>
-            <p><strong>Face à</strong> la baie de Cannes — spot abrité, idéal pour débuter.</p>
-          </div>
-
-          <!-- Fiche Google (reprise du profil Google Business) -->
-          <div class="efca-gcard efca-reveal">
-            <div class="efca-gcard__head">
-              <span class="efca-gcard__g" aria-hidden="true"><span>G</span></span>
-              <div>
-                <div class="efca-gcard__name">eFoil Côte d'Azur</div>
-                <div class="efca-gcard__cat">Location de matériel nautique · Sports nautiques</div>
-              </div>
-            </div>
-            <div class="efca-gcard__rating">
-              <span class="efca-gcard__score">5,0</span>
-              <span class="efca-stars" aria-hidden="true">★★★★★</span>
-              <small>230 avis Google</small>
-            </div>
-            <div class="efca-gcard__meta">
-              <span><span class="efca-gcard__open">Ouvert</span> · ferme à 19 h <em>(à confirmer)</em></span>
-              <span>Plage des Dauphins, Bd du Midi Louise Moreau, 06150 Mandelieu-la-Napoule</span>
-              <span>06 35 30 50 67</span>
-            </div>
-            <div class="efca-gcard__photos">
-              <img src="assets/img/cdz-07.webp" width="1400" height="933" alt="Photo Google — session eFoil" loading="lazy" decoding="async">
-              <img src="assets/img/cdz-08.webp" width="1400" height="933" alt="Photo Google — rider eFoil" loading="lazy" decoding="async">
-              <img src="assets/img/cdz-11.webp" width="1120" height="1400" alt="Photo Google — baie de Cannes" loading="lazy" decoding="async">
-            </div>
-            <div class="efca-gcard__actions">
-              <!-- {{LIEN_ITINERAIRE}} = lien Google Maps "Itinéraire" -->
-              <a class="efca-btn efca-btn--primary" href="{{LIEN_ITINERAIRE}}" target="_blank" rel="noopener" data-efca-cta="itineraire">Itinéraire</a>
-              <a class="efca-btn efca-btn--secondary" href="{{LIEN_FICHE_GOOGLE}}" target="_blank" rel="noopener" data-efca-cta="fiche-google">Voir la fiche &amp; les avis</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="efca-place__map efca-reveal" style="margin-top:var(--efca-space-lg)">
-          <!-- Carte chargée en lazy ; remplacer la requête q= par un lien de la vraie fiche si besoin -->
-          <iframe
-            src="https://maps.google.com/maps?q=eFoil+C%C3%B4te+d%27Azur+Mandelieu-la-Napoule&t=m&z=15&output=embed"
-            width="600" height="375" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            title="Carte — Plage des Dauphins, Mandelieu-la-Napoule"></iframe>
-        </div>
-      </div>
-    </section>
-
     <!-- ===================== 5. ENCADREMENT & CONFIANCE ===================== -->
     <section class="efca-section efca-section--cream" id="encadrement" aria-labelledby="enc-title">
       <div class="efca-container">
@@ -713,6 +650,67 @@
     <div class="efca-wavesep" aria-hidden="true" style="background:var(--efca-color-bg)">
       <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,75 480,75 720,45 C960,15 1200,15 1440,45 L1440,80 L0,80 Z" fill="#FCF8F3"/></svg>
     </div>
+
+    <!-- ===================== LIEU & ACCÈS ===================== -->
+    <section class="efca-section efca-section--cream" id="lieu" aria-labelledby="lieu-title">
+      <div class="efca-container">
+        <div class="efca-section__head efca-reveal">
+          <p class="efca-label">Lieu &amp; accès</p>
+          <h2 id="lieu-title">Plage des Dauphins, Mandelieu</h2>
+        </div>
+
+        <div class="efca-place">
+          <div class="efca-nap efca-reveal">
+            <!-- NAP AU PIXEL — identique fiche Google, footer et JSON-LD. Ne pas paraphraser. -->
+            <address>
+              <strong>Plage des Dauphins</strong>, Bd du Midi Louise Moreau<br>
+              06150 Mandelieu-la-Napoule<br>
+              <a class="efca-nap__phone" href="tel:+33635305067">06 35 30 50 67</a>
+            </address>
+            <p style="margin-top:1rem"><strong>Horaires :</strong> 9 h – 19 h (saison) <em>— à confirmer</em></p>
+            <p><strong>Accès :</strong> stationnement à proximité <em>— à préciser</em></p>
+            <p><strong>Face à</strong> la baie de Cannes — spot abrité, idéal pour débuter.</p>
+          </div>
+
+          <!-- Fiche Google (reprise du profil Google Business) -->
+          <div class="efca-gcard efca-reveal">
+            <div class="efca-gcard__head">
+              <span class="efca-gcard__g" aria-hidden="true"><span>G</span></span>
+              <div>
+                <div class="efca-gcard__name">eFoil Côte d'Azur</div>
+                <div class="efca-gcard__cat">Location de matériel nautique · Sports nautiques</div>
+              </div>
+            </div>
+            <div class="efca-gcard__rating">
+              <span class="efca-gcard__score">5,0</span>
+              <span class="efca-stars" aria-hidden="true">★★★★★</span>
+              <small>230 avis Google</small>
+            </div>
+            <div class="efca-gcard__meta">
+              <span><span class="efca-gcard__open">Ouvert</span> · ferme à 19 h <em>(à confirmer)</em></span>
+              <span>Plage des Dauphins, Bd du Midi Louise Moreau, 06150 Mandelieu-la-Napoule</span>
+              <span>06 35 30 50 67</span>
+            </div>
+            <div class="efca-gcard__photos">
+              <img src="assets/img/cdz-07.webp" width="1400" height="933" alt="Photo Google — session eFoil" loading="lazy" decoding="async">
+              <img src="assets/img/cdz-08.webp" width="1400" height="933" alt="Photo Google — rider eFoil" loading="lazy" decoding="async">
+              <img src="assets/img/cdz-11.webp" width="1120" height="1400" alt="Photo Google — baie de Cannes" loading="lazy" decoding="async">
+            </div>
+            <div class="efca-gcard__actions">
+              <a class="efca-btn efca-btn--primary" href="{{LIEN_ITINERAIRE}}" target="_blank" rel="noopener" data-efca-cta="itineraire">Itinéraire</a>
+              <a class="efca-btn efca-btn--secondary" href="{{LIEN_FICHE_GOOGLE}}" target="_blank" rel="noopener" data-efca-cta="fiche-google">Voir la fiche &amp; les avis</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="efca-place__map efca-reveal" style="margin-top:var(--efca-space-lg)">
+          <iframe
+            src="https://maps.google.com/maps?q=eFoil+C%C3%B4te+d%27Azur+Mandelieu-la-Napoule&t=m&z=15&output=embed"
+            width="600" height="375" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Carte — eFoil Côte d'Azur, Plage des Dauphins, Mandelieu-la-Napoule"></iframe>
+        </div>
+      </div>
+    </section>
 
     <!-- ===================== 8. MUR D'AVIS ===================== -->
     <section class="efca-section efca-section--cream" id="avis" aria-labelledby="avis-title">
