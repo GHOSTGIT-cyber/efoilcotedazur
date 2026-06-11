@@ -164,6 +164,7 @@ EDITIONS={
  'v3-escapade':          dict(label="Escapade",          hero=('img','hero-chateau'), order=V3_ORDER),
  'v4-full-drone':        dict(label="Full drone",        hero=('video',None),
                               media=DRONE_COMMON, gallery=GALLERY_DRONE, pooldir='pool-drone'),
+ 'v5-como':              dict(label="COMO",              hero=('img','hero-chateau'), theme='cb-como'),
 }
 
 def pool_script(dirn):
@@ -178,6 +179,7 @@ if __name__=='__main__':
         h=h.replace('<title>eFoil au golfe de Saint-Tropez — sessions au départ du domaine COMO Le Beauvallon</title>',
                     f'<title>eFoil · COMO Le Beauvallon — golfe de Saint-Tropez · Édition {cfg["label"]}</title>')
         h=h.replace('cb-lieu__fig cb-parallax','cb-lieu__fig').replace('cb-beach__fig cb-parallax cb-fade','cb-beach__fig cb-fade')
+        if cfg.get('theme'): h=h.replace('<div class="cb-root" id="cb-top">','<div class="cb-root '+cfg['theme']+'" id="cb-top">',1)
         kind,name=cfg['hero']
         h=replace_slot(h,'MEDIA_HERO_VIDEO', video_fill(VIDEO_ALT) if kind=='video' else img_fill(name,A(name),lazy=False))
         for tag,fn in media: h=replace_slot(h,tag,fn())

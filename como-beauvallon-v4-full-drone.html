@@ -514,6 +514,29 @@ html,body{margin:0}
 .cb-media,.cb-fill,.cb-mosaic__fallback,.cb-mtile img{filter:var(--cb-warm)}
 .cb-hero__media img,.cb-hero__media video,.cb-breath__media img,.cb-breath__media video,.cb-pin__bg img,.cb-pin__bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 
+/* ═══════ Variante COMO (édition v5) : palette plus claire · typo plus fine · grandes images ═══════ */
+.cb-root.cb-como{--cb-cream:#faf7f1;--cb-sand:#f4eee4;--cb-paper:#f7f2e8;--cb-line:rgba(43,36,25,.10);line-height:1.78}
+/* moins de sombre : sections espresso -> claires */
+.cb-como .cb-ink,.cb-como .cb-footer{background:var(--cb-paper);color:var(--cb-teal-900)}
+.cb-como .cb-ink .cb-display,.cb-como .cb-book h2,.cb-como .cb-footer__brand b{color:var(--cb-teal-900)}
+.cb-como .cb-book__sub,.cb-como .cb-book__facts li,.cb-como .cb-footer p,.cb-como .cb-footer li,.cb-como .cb-footer a{color:var(--cb-teal-700)}
+.cb-como .cb-eyebrow--book{color:var(--cb-teal-700)}
+.cb-como .cb-footer h4,.cb-como .cb-footer__bot p{color:var(--cb-teal-600)}
+.cb-como .cb-book__panel{background:rgba(43,36,25,.035);border-color:var(--cb-line)}
+.cb-como .cb-footer__bot{border-top-color:var(--cb-line)}
+.cb-como .cb-book__facts b{color:var(--cb-terra-deep)}
+.cb-como .cb-footer__brand i{color:var(--cb-terra)}
+/* typographie plus fine et espacée (signature COMO) */
+.cb-como .cb-display{font-weight:200;font-stretch:112%;letter-spacing:.1em}
+.cb-como .cb-eyebrow{letter-spacing:.34em;font-weight:300}
+.cb-como .cb-section{padding-block:clamp(84px,13vw,168px)}
+/* grandes images : mosaïques plus hautes, lieu plus grand, expérience en plein cadre + légende centrée */
+.cb-como .cb-mosaic{min-height:74vh;min-height:74svh}
+@media(min-width:900px){.cb-como .cb-lieu{grid-template-columns:.78fr 1.22fr}}
+@media(min-width:860px){.cb-como .cb-exp__row,.cb-como .cb-exp__row--flip{grid-template-columns:1fr}}
+.cb-como .cb-exp__t{max-width:720px;margin-inline:auto;text-align:center;margin-top:1.3rem}
+.cb-como .cb-exp__t p{margin-inline:auto}
+
 /* ── prefers-reduced-motion : tout contenu visible, animations coupées ────── */
 @media (prefers-reduced-motion: reduce){
   .cb-root .cb-grain{animation:none}
