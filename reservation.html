@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Réserver ma session — eFoil Côte d'Azur (DÉMO)</title>
+  <!-- DÉMO sur site annexe : ne pas indexer -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F4631F">
+
+  <link rel="preload" href="assets/fonts/inter-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/efca.css">
+</head>
+<body>
+  <!-- ====================== BANDEAU DÉMO (non ambigu) ====================== -->
+  <div class="efca-demo-banner" role="note">
+    Environnement de <b>DÉMONSTRATION</b> — paiement <b>simulé</b>, aucune transaction réelle
+  </div>
+
+  <header class="efca-header">
+    <div class="efca-container efca-header__inner">
+      <a class="efca-logo" href="index.html" aria-label="eFoil Côte d'Azur"><span class="efca-logo__e">e</span><span class="efca-logo__foil">FOIL</span><span class="efca-logo__sub">Côte d'Azur</span></a>
+      <a class="efca-btn efca-btn--secondary" href="index.html">← Retour</a>
+    </div>
+  </header>
+
+  <main id="main" class="efca-section">
+    <div class="efca-container efca-tunnel">
+
+      <!-- Fil d'étapes -->
+      <ol class="efca-steps" id="efca-steps">
+        <li data-step="form" aria-current="true"><span class="efca-steps__dot">1</span> Vos infos</li>
+        <li data-step="pay"><span class="efca-steps__dot">2</span> Paiement</li>
+        <li data-step="success"><span class="efca-steps__dot">3</span> Confirmation</li>
+      </ol>
+
+      <!-- ====================== ÉTAPE 1 — FORMULAIRE ====================== -->
+      <section class="efca-step" id="efca-step-form" aria-label="Vos informations">
+        <p class="efca-label">Réservation</p>
+        <h1 style="font-size:var(--efca-fs-h1);margin-bottom:var(--efca-space-2xs)">Réservez votre session eFoil</h1>
+        <p class="efca-lead" style="color:var(--efca-color-text-muted);margin-bottom:var(--efca-space-lg)">
+          Base de Mandelieu — Plage des Dauphins. Session 1&nbsp;h, débutants bienvenus.
+        </p>
+
+        <div class="efca-form__error" id="efca-form-error" hidden role="alert"></div>
+
+        <form class="efca-form" id="efca-reservation-form" novalidate>
+          <!-- Honeypot anti-spam (ne pas remplir) -->
+          <div class="efca-hp" aria-hidden="true">
+            <label>Ne pas remplir<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <div class="efca-field">
+            <label for="f-name">Nom complet <span class="efca-req">*</span></label>
+            <input class="efca-input" id="f-name" name="name" type="text" required autocomplete="name">
+          </div>
+
+          <div class="efca-field efca-field--row">
+            <div class="efca-field">
+              <label for="f-email">E-mail <span class="efca-req">*</span></label>
+              <input class="efca-input" id="f-email" name="email" type="email" required autocomplete="email">
+            </div>
+            <div class="efca-field">
+              <label for="f-phone">Téléphone <span class="efca-req">*</span></label>
+              <input class="efca-input" id="f-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel">
+            </div>
+          </div>
+
+          <div class="efca-field">
+            <label for="f-base">Base</label>
+            <select class="efca-select" id="f-base" name="base">
+              <option value="Mandelieu — Plage des Dauphins" selected>Mandelieu — Plage des Dauphins</option>
+            </select>
+          </div>
+
+          <div class="efca-field efca-field--row">
+            <div class="efca-field">
+              <label for="f-date">Date <span class="efca-req">*</span></label>
+              <input class="efca-input" id="f-date" name="date" type="date" required>
+            </div>
+            <div class="efca-field">
+              <label for="f-slot">Créneau <span class="efca-req">*</span></label>
+              <select class="efca-select" id="f-slot" name="slot" required>
+                <option value="">Choisir…</option>
+                <option>09:00</option><option>10:30</option><option>12:00</option>
+                <option>14:00</option><option>15:30</option><option>17:00</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="efca-field efca-field--row">
+            <div class="efca-field">
+              <label for="f-participants">Participants <span class="efca-req">*</span></label>
+              <input class="efca-input" id="f-participants" name="participants" type="number" min="1" max="8" value="1" required inputmode="numeric">
+            </div>
+            <div class="efca-field">
+              <label for="f-level">Niveau</label>
+              <select class="efca-select" id="f-level" name="level">
+                <option value="debutant" selected>Débutant</option>
+                <option value="intermediaire">Intermédiaire</option>
+                <option value="confirme">Confirmé</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="efca-field">
+            <label for="f-message">Message (optionnel)</label>
+            <textarea class="efca-textarea" id="f-message" name="message"></textarea>
+          </div>
+
+          <button class="efca-btn efca-btn--primary efca-btn--lg efca-btn--block" type="submit" id="efca-submit" data-efca-cta="reservation-submit">
+            Continuer
+          </button>
+          <p class="efca-pay-note">Vos données ne transitent jamais par l'URL. Anti-spam actif.</p>
+        </form>
+      </section>
+
+      <!-- ====================== ÉTAPE 2 — PAIEMENT SIMULÉ ====================== -->
+      <section class="efca-step" id="efca-step-pay" hidden aria-label="Paiement">
+        <p class="efca-label">Paiement</p>
+        <h2 style="margin-bottom:var(--efca-space-lg)">Récapitulatif &amp; paiement</h2>
+
+        <div class="efca-recap" id="efca-recap">
+          <div class="efca-recap__row"><span>Base</span><strong data-recap="base">—</strong></div>
+          <div class="efca-recap__row"><span>Date &amp; créneau</span><strong data-recap="when">—</strong></div>
+          <div class="efca-recap__row"><span>Participants</span><strong data-recap="participants">—</strong></div>
+          <div class="efca-recap__row"><span>Session 1&nbsp;h × <span data-recap="unit">150</span> €</span><strong data-recap="line">—</strong></div>
+          <div class="efca-recap__row efca-recap__total"><span>Total</span><span data-recap="total">—</span></div>
+        </div>
+
+        <!-- ===== Bloc paiement SIMULÉ (mode 'simulation') ===== -->
+        <div id="efca-pay-simulation">
+          <div class="efca-paycard">
+            <div class="efca-paycard__brandrow"><span>VISA</span><span>MC</span></div>
+            <div class="efca-field">
+              <label for="p-card">Numéro de carte <span class="efca-req">*</span> <span style="font-weight:600;color:var(--efca-color-text-muted)">(factice)</span></label>
+              <input class="efca-input" id="p-card" type="text" inputmode="numeric" autocomplete="off"
+                     value="4242 4242 4242 4242" placeholder="4242 4242 4242 4242">
+            </div>
+            <div class="efca-field efca-field--row">
+              <div class="efca-field">
+                <label for="p-exp">Expiration</label>
+                <input class="efca-input" id="p-exp" type="text" value="12 / 30" placeholder="MM / AA" autocomplete="off">
+              </div>
+              <div class="efca-field">
+                <label for="p-cvc">CVC</label>
+                <input class="efca-input" id="p-cvc" type="text" value="123" placeholder="CVC" autocomplete="off">
+              </div>
+            </div>
+            <button class="efca-btn efca-btn--primary efca-btn--lg efca-btn--block" type="button" id="efca-pay-btn" data-efca-cta="pay-simulation">
+              Payer <span data-recap="total-btn">—</span>
+            </button>
+            <p class="efca-pay-note">SIMULATION — aucune carte réelle n'est traitée, aucun PSP appelé.</p>
+          </div>
+
+          <!-- Animation de traitement (masquée par défaut) -->
+          <div class="efca-processing" id="efca-processing" hidden>
+            <div class="efca-spinner" aria-hidden="true"></div>
+            <p><strong>Traitement du paiement…</strong><br>Simulation en cours, merci de patienter.</p>
+          </div>
+        </div>
+
+        <!-- ===== Emplacement Stripe (mode 'stripe') — NON ACTIF ===== -->
+        <!-- STRIPE : Embedded Checkout monté ici par efca-reservation.js (voir stub).
+             NE PAS imbriquer dans un autre iframe : Stripe gère son propre iframe. -->
+        <div id="efca-pay-stripe" hidden>
+          <div id="efca-stripe-mount">
+            <div class="efca-stripe-placeholder">
+              Stripe Embedded Checkout s'affichera ici en mode <strong>stripe</strong>
+              (inactif tant que les clés ne sont pas fournies).
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top:var(--efca-space-md)">
+          <button class="efca-btn efca-btn--ghost" type="button" id="efca-back-form" style="color:var(--efca-color-accent-deep);border-color:var(--efca-color-accent-deep)">← Modifier mes infos</button>
+        </p>
+      </section>
+
+      <!-- ====================== ÉTAPE 3 — SUCCÈS ====================== -->
+      <section class="efca-step efca-success" id="efca-step-success" hidden aria-label="Confirmation">
+        <div class="efca-success__check" aria-hidden="true">✓</div>
+        <h2 id="efca-success-title">Paiement confirmé</h2>
+        <p class="efca-lead" id="efca-success-msg" style="color:var(--efca-color-text-muted);max-width:34rem;margin:1rem auto 0">
+          Votre réservation est enregistrée. Vous recevrez un e-mail de confirmation.
+        </p>
+        <p><span class="efca-success__tag" id="efca-success-tag">Simulation / Démo</span></p>
+        <p style="margin-top:var(--efca-space-lg)">
+          <a class="efca-btn efca-btn--secondary" href="index.html">Retour à l'accueil</a>
+        </p>
+        <p class="efca-pay-note">Réf. réservation : <strong id="efca-ref">—</strong></p>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="assets/js/efca-config.js"></script>
+  <script src="assets/js/efca-reservation.js" defer></script>
+</body>
+</html>
