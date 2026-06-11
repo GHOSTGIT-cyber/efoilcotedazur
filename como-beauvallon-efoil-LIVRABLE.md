@@ -20,28 +20,27 @@ les woff2 ne sont pas déposés).
 
 À partir du template (placeholders) `como-beauvallon-efoil.html`, **3 éditions** de la **même page Beauvallon** (DA chaude identique), câblées avec les médias du dossier `medias/`. Elles diffèrent par le **héros** et l'ambiance :
 
-| Fichier | Héros | Respirations | Galerie / mood |
-|---|---|---|---|
-| `como-beauvallon-v1-coucher-de-soleil.html` | Coucher de soleil St-Tropez (silhouettes) | sunset + roches rouges | mix golfe / Lérins / Estérel |
-| `como-beauvallon-v2-le-domaine.html` | **Vidéo** Côte d'Azur (poster = riders devant le domaine) + **vidéo de fond** dans la scène « Expérience » | roches rouges + sunset | mix |
-| `como-beauvallon-v3-escapade.html` | Formation au-dessus du golfe | roches rouges + golfe | Lérins / Estérel (fort, roche rouge) |
+| Fichier | Héros | Ambiance |
+|---|---|---|
+| `como-beauvallon-v1-coucher-de-soleil.html` | **Vidéo drone au coucher du soleil** (boucle compressée 11,7 Mo + poster) — riders sur le golfe | la plus spectaculaire |
+| `como-beauvallon-v2-le-domaine.html` | **Grande vue aérienne COMO** (le château Belle Époque + ponton + golfe) | patrimoniale |
+| `como-beauvallon-v3-escapade.html` | Formation au-dessus du golfe | dynamique / scénique |
 
-**Pipeline reproductible** (relancer quand tu ajoutes/remplaces des photos) :
-1. `python tools/optimize_media.py` → recadre + compresse en WebP web (`medias/web/`, 20 fichiers ≈ 3,8 Mo). Édite `SRC`/`JOBS` pour changer une photo ou un cadrage (vfocus/hfocus).
-2. `python tools/build_versions.py` → régénère les 3 HTML. Édite `EDITIONS` pour changer héros/galerie ou créer une 4ᵉ version.
+**Communes aux 3** : Lieu = **château COMO** (golden hour) · Beach club = **parasols/transats COMO** · Expérience = 3 images (silence / apesanteur / à votre rythme), **section image-led, plus aucun scroll bloquant** · Galerie horizontale = **8 plans** (Beauvallon, Lérins, Estérel, yachts de Cannes) · Déroulé = briefing → équipement → à l'eau → vol.
+
+**Médias exploités** : tes photos (`medias/`) + **images COMO** (grande vue, château, beach club — `medias/como-web/`, droits à clearer) + **frames extraites des vidéos** (drone sunset, yachts, Estérel) + **boucle vidéo compressée** (`medias/web/hero-video.mp4`).
+
+**Grade** : les plans **plein-jour/froids** reçoivent un **grade chaud subtil** (unifie avec le golden-hour, sans gros filtre orange) ; les plans déjà chauds (COMO, couchers) restent natifs. Voiles héros/respirations **dé-orangés** (neutres, plus légers).
+
+**Pipeline reproductible** :
+1. `python tools/optimize_media.py` → recadre + grade + WebP (`medias/web/`). Édite `SRC`/`JOBS` (la colonne `grade` = 1/0 active le grade chaud).
+2. `python tools/build_versions.py` → régénère les 3 HTML. Édite `EDITIONS`/`GALLERY` pour changer héros, galerie, ou créer une 4ᵉ version.
+
+**Vidéo** : compressée via le ffmpeg fourni par `imageio-ffmpeg` (installé). `tools/` n'inclut pas encore le script vidéo — commande utilisée : extraire le segment coucher de soleil (~18-29 s) de `CotedeZur_Awaking.mov` → `hero-video.mp4` (h264, 1080p, muet, `+faststart`) + poster. Lecture **desktop only** (mobile = poster). Une boucle **webm** + une **9:16 mobile** peuvent être ajoutées.
 
 **Photos** : tous les `<img>` ont `width`/`height` (anti-CLS), `alt` descriptif, `loading="lazy"` sous le fold (héros en `fetchpriority="high"`).
 
-**⚠️ Vidéos — à compresser avant prod.** Pas de ffmpeg sur la machine de build : la vidéo de fond est câblée telle quelle (`<video preload="metadata" poster=… data-cb-autoplay>` → lecture **desktop only**, mobile = poster) en pointant le `.MP4` source **lourd (~108 Mo)**. À remplacer par un export web compressé. Exemple :
-```bash
-# boucle hero ~10 s, 1080p, sans son, ~3–5 Mo (mp4 + webm)
-ffmpeg -i medias/videos-cotedazur/CotedeZur_Awaking.mov -t 10 -an -vf "scale=1920:-2" -c:v libx264 -crf 24 -movflags +faststart hero.mp4
-ffmpeg -i medias/videos-cotedazur/CotedeZur_Awaking.mov -t 10 -an -vf "scale=1920:-2" -c:v libvpx-vp9 -crf 34 -b:v 0 hero.webm
-# version 9:16 pour mobile : reel vertical déjà dispo (Lift_Cotedezur_Awaking_Vertical.MP4)
-```
-(La vidéo « Awaking » horizontale propre est en `.mov` — non lisible en navigateur ; le `.MP4` câblé a des sous-titres incrustés. Réexporter une version web propre.)
-
-**Chemins** : les éditions référencent `medias/web/…` en **relatif** (preview locale OK). Pour WordPress, téléverser `medias/web/` (+ la vidéo compressée) vers `/assets/…` et adapter les chemins (ou laisser relatif si servi depuis le même dossier).
+**Chemins** : `medias/web/…` en **relatif** (preview locale OK). Pour WordPress, téléverser `medias/web/` vers `/assets/…` et adapter (ou laisser relatif).
 
 ---
 

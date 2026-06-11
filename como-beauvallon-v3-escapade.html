@@ -278,7 +278,7 @@ html,body{margin:0}
 .cb-hero__media .cb-ph{transform-origin:center}
 .cb-motion .cb-hero__media .cb-ph,.cb-motion .cb-hero__media .cb-fill{transform:scale(1.14)}
 .cb-hero__veil{position:absolute;inset:0;z-index:1;
-  background:linear-gradient(180deg,rgba(43,36,25,.50) 0%,rgba(43,36,25,.12) 30%,rgba(43,36,25,.22) 58%,rgba(43,36,25,.84) 100%)}
+  background:linear-gradient(180deg,rgba(20,18,15,.38) 0%,rgba(20,18,15,.04) 30%,rgba(20,18,15,.12) 58%,rgba(20,18,15,.72) 100%)}
 .cb-hero__inner{position:relative;z-index:2;width:100%;padding:0 var(--cb-gut) clamp(40px,8vh,96px);max-width:var(--cb-wrap);margin-inline:auto}
 .cb-hero h1{color:var(--cb-white);font-size:clamp(2.6rem,8.4vw,7rem);max-width:13ch}
 .cb-hero__sub{margin-top:1.3rem;color:var(--cb-mist);max-width:40ch;font-size:clamp(1.05rem,1.7vw,1.35rem)}
@@ -310,29 +310,23 @@ html,body{margin:0}
 .cb-breath{position:relative;min-height:78vh;min-height:78svh;display:flex;align-items:flex-end;overflow:hidden}
 .cb-breath .cb-breath__media{position:absolute;inset:0;z-index:0}
 .cb-breath .cb-breath__media .cb-ph{height:100%}
-.cb-breath__veil{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(43,36,25,.10),rgba(43,36,25,.66))}
+.cb-breath__veil{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(20,18,15,.05),rgba(20,18,15,.52))}
 .cb-breath__inner{position:relative;z-index:2;padding:0 var(--cb-gut) clamp(46px,9vh,110px);max-width:var(--cb-wrap);margin-inline:auto;width:100%}
 .cb-breath p{font-family:var(--cb-ff-display);font-stretch:118%;font-weight:200;text-transform:uppercase;
   letter-spacing:.03em;line-height:1;color:var(--cb-white);font-size:clamp(1.8rem,5vw,4rem);max-width:18ch}
 
-/* ── Section EXPÉRIENCE (pinned scroll-through) ───────────────────────────── */
-.cb-pin{position:relative;background:var(--cb-ink);color:var(--cb-mist)}
-.cb-pin__bg{position:absolute;inset:0;z-index:0}
-.cb-pin__bg .cb-ph{height:100%}
-.cb-pin__veil{position:absolute;inset:0;z-index:1;background:linear-gradient(118deg,rgba(43,36,25,.84),rgba(43,36,25,.62) 60%,rgba(43,36,25,.78))}
-.cb-pin__steps{position:relative;z-index:2}
-.cb-step{min-height:92vh;min-height:92svh;display:flex;align-items:center;padding-inline:var(--cb-gut)}
-.cb-step__box{max-width:var(--cb-wrap);margin-inline:auto;width:100%}
-.cb-step__n{display:block;font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;color:var(--cb-gold);
-  font-family:var(--cb-ff-display);margin-bottom:1.2rem}
-.cb-step h3{font-family:var(--cb-ff-display);font-stretch:122%;font-weight:200;text-transform:uppercase;letter-spacing:.03em;
-  line-height:.96;color:var(--cb-white);font-size:clamp(2rem,5.4vw,4.2rem);max-width:13ch}
-.cb-step p{margin-top:1.4rem;max-width:38ch;color:var(--cb-mist);font-size:clamp(1.02rem,1.5vw,1.2rem)}
-/* desktop : on superpose les steps pour le cross-fade pendant le pin */
-@media(min-width:769px){
-  .cb-motion .cb-pin__steps{height:92vh;height:92svh}
-  .cb-motion .cb-pin__steps .cb-step{position:absolute;inset:0}
+/* ── Section EXPÉRIENCE (image-led, défilement normal — aucun scroll bloquant) ── */
+.cb-exp__intro{max-width:44ch}
+.cb-exp__row{display:grid;grid-template-columns:1fr;gap:clamp(24px,4vw,52px);align-items:center;margin-top:clamp(42px,6.5vw,86px)}
+@media(min-width:860px){
+  .cb-exp__row{grid-template-columns:1.02fr .98fr}
+  .cb-exp__row--flip .cb-exp__media{order:2}
 }
+.cb-exp__media{overflow:hidden}
+.cb-exp__n{font-family:var(--cb-ff-display);font-stretch:125%;font-weight:200;color:var(--cb-terra);font-size:.92rem;letter-spacing:.24em}
+.cb-exp__t h3{font-family:var(--cb-ff-display);font-stretch:118%;font-weight:300;text-transform:uppercase;letter-spacing:.04em;
+  font-size:clamp(1.6rem,3.6vw,2.7rem);color:var(--cb-teal-900);margin-top:.5rem}
+.cb-exp__t p{margin-top:1.1rem;color:var(--cb-teal-700);max-width:44ch}
 
 /* ── Section POUR QUI (éditorial, pas de grille de cards) ─────────────────── */
 .cb-who h2{font-size:clamp(2rem,4.6vw,3.6rem);color:var(--cb-teal-900);max-width:16ch;margin-top:1rem}
@@ -493,7 +487,7 @@ html,body{margin:0}
 .cb-glint-dot{display:inline-block;width:.5em;height:.5em;border-radius:50%;background:var(--cb-glint);
   box-shadow:0 0 9px rgba(29,198,200,.5);vertical-align:.06em;margin-right:.5em}
 /* Lisibilité du texte clair posé sur imagerie golden-hour (voiles désormais plus légers) */
-.cb-hero h1,.cb-hero__sub,.cb-hero .cb-eyebrow,.cb-hero__meta,.cb-breath p,.cb-step__box{text-shadow:0 1px 20px rgba(43,36,25,.5)}
+.cb-hero h1,.cb-hero__sub,.cb-hero .cb-eyebrow,.cb-hero__meta,.cb-breath p{text-shadow:0 1px 22px rgba(18,16,13,.6)}
 /* Médias réels (éditions photo/vidéo) : remplissage + ratios */
 .cb-media{display:block;width:100%;height:auto;object-fit:cover;background:var(--cb-sand)}
 .cb-fill{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:var(--cb-sand)}
@@ -546,7 +540,7 @@ html,body{margin:0}
          if(v && matchMedia('(min-width:769px)').matches){ v.play(); }   // sinon : poster seul + tap-to-play -->
   <section class="cb-hero" aria-labelledby="cb-h1">
     <div class="cb-hero__media">
-      <img class="cb-fill" src="medias/web/hero-formation.webp" width="1920" height="1080" fetchpriority="high" decoding="async" alt="Plusieurs riders en formation volent sur leurs eFoils au-dessus du golfe de Saint-Tropez.">
+      <img class="cb-fill" src="medias/web/hero-formation.webp" width="1920" height="1080" fetchpriority="high" decoding="async" alt="Riders en formation volant sur leurs eFoils au-dessus du golfe de Saint-Tropez.">
     </div>
     <div class="cb-hero__veil"></div>
     <div class="cb-hero__inner">
@@ -582,7 +576,7 @@ html,body{margin:0}
         <div class="cb-lieu__media cb-fade">
           <!-- MEDIA_LIEU — paysage 4:3/16:9 — domaine / ponton / eau au calme du matin -->
           <figure class="cb-lieu__fig">
-            <img class="cb-media cb-ratio-43" src="medias/web/lieu-domaine.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Le domaine au bord du golfe : deux riders en vol devant la plage et les pins parasols.">
+            <img class="cb-media cb-ratio-43" src="medias/web/lieu-chateau.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Le palace Belle Époque du domaine COMO Le Beauvallon, dans les pins, au coucher du soleil.">
           </figure>
         </div>
       </div>
@@ -608,10 +602,10 @@ html,body{margin:0}
       </ul>
       <div class="cb-beach__grid">
         <figure class="cb-beach__fig cb-fade">
-          <img class="cb-media cb-ratio-169" src="medias/web/beach-terrasse.webp" width="1280" height="720" loading="lazy" decoding="async" alt="La terrasse de la base face à la mer, planches eFoil prêtes.">
+          <img class="cb-media cb-ratio-169" src="medias/web/beach-parasols.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Le beach club du domaine : parasols dorés et vue sur le golfe de Saint-Tropez.">
         </figure>
         <figure class="cb-beach__fig cb-fade">
-          <img class="cb-media cb-ratio-34" src="medias/web/beach-ponton.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Préparation au ponton avant la session : planches et télécommandes.">
+          <img class="cb-media cb-ratio-34" src="medias/web/beach-loungers.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Transats et parasols du beach club face à la mer.">
         </figure>
       </div>
     </div>
@@ -629,36 +623,49 @@ html,body{margin:0}
     </div>
   </section>
 
-  <!-- ══════════════════ 4 · L'EXPÉRIENCE (pinned scroll-through) ══════════════════
-       MEDIA_EXP_VIDEO — 16:9 — fond tenu : rider en vol, plan large et lent -->
-  <section class="cb-pin cb-bleed cb-ink-on" id="cb-exp" aria-labelledby="cb-exp-h">
-    <div class="cb-pin__bg">
-      <img class="cb-fill" src="medias/web/exp-formation.webp" width="1920" height="1080" loading="lazy" decoding="async" alt="Riders volant en silence au-dessus du golfe.">
-    </div>
-    <div class="cb-pin__veil"></div>
-    <h2 id="cb-exp-h" class="cb-sr-only">L'expérience eFoil</h2>
-    <div class="cb-pin__steps">
-      <article class="cb-step" data-step="0">
-        <div class="cb-step__box">
-          <span class="cb-step__n">L'expérience — 01</span>
-          <h3 class="cb-reveal"><span class="cb-line"><span class="cb-line__in">Le silence</span></span></h3>
-          <p>Pas de moteur thermique, pas de vagues, pas de sillage bruyant. Le foil électrique Lift vous porte au-dessus de la surface, presque sans un son.</p>
+  <!-- ══════════════════ 4 · L'EXPÉRIENCE (image-led, défilement normal) ══════════════════
+       MEDIA_EXP_1 (16:9 le silence) · MEDIA_EXP_2 (4:3 l'apesanteur) · MEDIA_EXP_3 (3:4 à votre rythme) -->
+  <section class="cb-section cb-exp" id="cb-exp" aria-labelledby="cb-exp-h">
+    <div class="cb-wrap">
+      <p class="cb-eyebrow">L'expérience</p>
+      <h2 id="cb-exp-h" class="cb-display cb-reveal">
+        <span class="cb-line"><span class="cb-line__in">Voler,</span></span>
+        <span class="cb-line"><span class="cb-line__in">vraiment</span></span>
+      </h2>
+      <p class="cb-lead cb-exp__intro cb-fade" style="margin-top:1.4rem">Une fois la vitesse prise, la planche quitte l'eau. Plus de vagues, plus de bruit de moteur — le golfe défile sous vos pieds.</p>
+
+      <div class="cb-exp__row cb-fade">
+        <figure class="cb-exp__media">
+          <img class="cb-media cb-ratio-169" src="medias/web/exp-silence.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Des riders glissent en silence sur le golfe au coucher du soleil.">
+        </figure>
+        <div class="cb-exp__t">
+          <span class="cb-exp__n">01</span>
+          <h3>Le silence</h3>
+          <p>Pas de moteur thermique, pas de sillage bruyant. Le foil électrique Lift vous porte au-dessus de la surface, presque sans un son.</p>
         </div>
-      </article>
-      <article class="cb-step" data-step="1">
-        <div class="cb-step__box">
-          <span class="cb-step__n">L'expérience — 02</span>
-          <h3 class="cb-reveal"><span class="cb-line"><span class="cb-line__in">L'apesanteur</span></span></h3>
-          <p>Une fois la vitesse prise, la planche quitte l'eau. Vous êtes porté par une aile, à quelques centimètres du golfe. Lisse, continu, sans effort.</p>
+      </div>
+
+      <div class="cb-exp__row cb-exp__row--flip cb-fade">
+        <figure class="cb-exp__media">
+          <img class="cb-media cb-ratio-43" src="medias/web/exp-apesanteur.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Deux riders portés par leur aile au-dessus du golfe, devant le domaine.">
+        </figure>
+        <div class="cb-exp__t">
+          <span class="cb-exp__n">02</span>
+          <h3>L'apesanteur</h3>
+          <p>Porté par une aile, à quelques centimètres de l'eau. Lisse, continu, sans effort — le sentiment rare de marcher sur le golfe.</p>
         </div>
-      </article>
-      <article class="cb-step" data-step="2">
-        <div class="cb-step__box">
-          <span class="cb-step__n">L'expérience — 03</span>
-          <h3 class="cb-reveal"><span class="cb-line"><span class="cb-line__in">À votre rythme</span></span></h3>
-          <p>La puissance se règle à la télécommande, progressivement. Les premiers vols viennent souvent dès la première séance — encadrés, en eaux calmes.</p>
+      </div>
+
+      <div class="cb-exp__row cb-fade">
+        <figure class="cb-exp__media">
+          <img class="cb-media cb-ratio-34" src="medias/web/exp-rythme.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Un moniteur accompagne un débutant lors de ses premiers vols.">
+        </figure>
+        <div class="cb-exp__t">
+          <span class="cb-exp__n">03</span>
+          <h3>À votre rythme</h3>
+          <p>La puissance se règle à la télécommande, progressivement. Les premiers vols viennent souvent dès la première séance, encadrés.</p>
         </div>
-      </article>
+      </div>
     </div>
   </section>
 
@@ -742,11 +749,14 @@ html,body{margin:0}
       </div>
     </div>
     <div class="cb-rail" tabindex="0" role="region" aria-label="Galerie de la session, défilement horizontal">
-      <figure class="cb-card"><img class="cb-media cb-ratio-34" src="medias/web/ride-lerins-orange.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Rider en vol sur une planche Lift orange devant le fort de Sainte-Marguerite."><figcaption>Le départ</figcaption></figure>
-      <figure class="cb-card"><img class="cb-media cb-ratio-43" src="medias/web/ride-redrock.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Trois riders en vol devant les roches rouges."><figcaption>Le matériel</figcaption></figure>
-      <figure class="cb-card"><img class="cb-media cb-ratio-34" src="medias/web/ride-lerins-green.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Rideuse souriante en vol sur une planche Lift verte."><figcaption>Le matin</figcaption></figure>
-      <figure class="cb-card"><img class="cb-media cb-ratio-43" src="medias/web/ride-formation.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Riders en formation au-dessus du golfe."><figcaption>Le ponton</figcaption></figure>
-      <figure class="cb-card"><img class="cb-media cb-ratio-34" src="medias/web/ride-esterel.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Couple partageant une planche, en vol devant le massif rouge de l'Estérel."><figcaption>La lumière</figcaption></figure>
+      <figure class="cb-card"><img class="cb-media cb-ratio-34" src="medias/web/ride-women.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Deux rideuses en eFoil sur l'eau calme, reflets du matin."><figcaption>Le vol</figcaption></figure>
+      <figure class="cb-card"><img class="cb-media cb-ratio-43" src="medias/web/ride-redrock.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Trois riders en vol devant les roches rouges."><figcaption>La roche rouge</figcaption></figure>
+      <figure class="cb-card"><img class="cb-media cb-ratio-34" src="medias/web/ride-lerins-orange.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Rider sur une planche Lift orange devant le fort de Sainte-Marguerite."><figcaption>Lérins</figcaption></figure>
+      <figure class="cb-card"><img class="cb-media cb-ratio-43" src="medias/web/ride-formation.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Riders en formation au-dessus du golfe."><figcaption>La formation</figcaption></figure>
+      <figure class="cb-card"><img class="cb-media cb-ratio-34" src="medias/web/ride-esterel.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Couple partageant une planche, en vol devant le massif rouge de l'Estérel."><figcaption>L'Estérel</figcaption></figure>
+      <figure class="cb-card"><img class="cb-media cb-ratio-34" src="medias/web/ride-yacht.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Riders en eFoil devant le port et ses yachts."><figcaption>Les yachts</figcaption></figure>
+      <figure class="cb-card"><img class="cb-media cb-ratio-34" src="medias/web/ride-esterel-vert.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Riders au pied des roches rouges de l'Estérel."><figcaption>La calanque</figcaption></figure>
+      <figure class="cb-card"><img class="cb-media cb-ratio-34" src="medias/web/ride-lerins-green.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Rideuse souriante en vol sur une planche Lift verte."><figcaption>Le sourire</figcaption></figure>
     </div>
   </section>
 
@@ -799,7 +809,7 @@ html,body{margin:0}
        MEDIA_BROLL_2 — 16:9 — rider minuscule dans un vaste seascape calme, golden hour -->
   <section class="cb-breath cb-bleed cb-ink-on" aria-label="Respiration visuelle">
     <div class="cb-breath__media">
-      <img class="cb-fill" src="medias/web/breath-golfe.webp" width="1920" height="1080" loading="lazy" decoding="async" alt="Riders en vol sur l'eau calme du golfe.">
+      <img class="cb-fill" src="medias/web/breath-sunset.webp" width="1920" height="1080" loading="lazy" decoding="async" alt="Vue drone : des riders en eFoil sur le golfe au coucher du soleil.">
     </div>
     <div class="cb-breath__veil"></div>
     <div class="cb-breath__inner">
@@ -1060,23 +1070,6 @@ html,body{margin:0}
           GSAP.fromTo(inner,{yPercent:-7},{yPercent:7,ease:'none',
             scrollTrigger:{trigger:el,start:'top bottom',end:'bottom top',scrub:true}});
         });
-      });
-
-      /* 4 — Section pinnée scroll-through (desktop only) */
-      mm.add("(min-width:769px) and (prefers-reduced-motion: no-preference)",function(){
-        var steps=GSAP.utils.toArray('.cb-pin .cb-step');
-        if(steps.length<2) return;
-        GSAP.set(steps,{autoAlpha:0}); GSAP.set(steps[0],{autoAlpha:1});
-        var tl=GSAP.timeline({scrollTrigger:{
-          trigger:'.cb-pin',start:'top top',
-          end:function(){return '+='+(window.innerHeight*(steps.length));},
-          pin:true,pinSpacing:true,scrub:1,anticipatePin:1,invalidateOnRefresh:true}});
-        steps.forEach(function(s,i){
-          if(i===0) return;
-          tl.to(steps[i-1],{autoAlpha:0,yPercent:-6,duration:.5},'>')
-            .fromTo(s,{autoAlpha:0,yPercent:6},{autoAlpha:1,yPercent:0,duration:.5},'<');
-        });
-        return function(){GSAP.set(steps,{clearProps:'all'});};
       });
 
       ST.refresh();
