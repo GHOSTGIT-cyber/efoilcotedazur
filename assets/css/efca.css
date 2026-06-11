@@ -402,6 +402,7 @@ p  { line-height: var(--efca-lh-base); }
 }
 .efca-hero__inner {
   max-width: 38rem;
+  margin-inline: 0;
   animation: heroSlideUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: 0.15s;
 }
