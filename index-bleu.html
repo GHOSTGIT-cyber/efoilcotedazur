@@ -196,8 +196,8 @@
                poster="assets/img/hero-stropez.webp" preload="metadata"
                width="1920" height="1080"
                aria-label="Rider en eFoil Lift au-dessus de l'eau, baie de Cannes / Mandelieu">
+          <source src="assets/video/hero-awaking.mp4" type="video/mp4">
           <source src="https://efoilcotedazur.fr/wp-content/uploads/2021/03/foil-electrique-LIFT.mp4" type="video/mp4">
-          <!-- Fallback si la vidéo ne charge pas : le poster reste affiché. -->
         </video>
       </div>
 
@@ -320,20 +320,40 @@
         </div>
         <div class="efca-process">
           <div class="efca-process__item efca-reveal">
-            <h3>Briefing au sol</h3>
-            <p>Accueil, consignes de sécurité et prise en main du matériel Lift.</p>
+            <div class="efca-process__img">
+              <img src="assets/img/step-briefing.webp" width="800" height="534" alt="Briefing au sol avec le moniteur" loading="lazy" decoding="async">
+            </div>
+            <div class="efca-process__body">
+              <h3>Briefing au sol</h3>
+              <p>Accueil, consignes de sécurité et prise en main du matériel Lift.</p>
+            </div>
           </div>
           <div class="efca-process__item efca-reveal">
-            <h3>Choix du foil</h3>
-            <p>On adapte la planche et l'aile à votre gabarit et votre niveau.</p>
+            <div class="efca-process__img">
+              <img src="assets/img/step-materiel.webp" width="800" height="1200" alt="Choix et réglage du foil" loading="lazy" decoding="async">
+            </div>
+            <div class="efca-process__body">
+              <h3>Choix du foil</h3>
+              <p>On adapte la planche et l'aile à votre gabarit et votre niveau.</p>
+            </div>
           </div>
           <div class="efca-process__item efca-reveal">
-            <h3>Première session</h3>
-            <p>Debout sur l'eau dès les premières minutes, accompagné par le moniteur.</p>
+            <div class="efca-process__img">
+              <img src="assets/img/step-session.webp" width="1200" height="800" alt="Première session eFoil encadrée" loading="lazy" decoding="async">
+            </div>
+            <div class="efca-process__body">
+              <h3>Première session</h3>
+              <p>Debout sur l'eau dès les premières minutes, accompagné par le moniteur.</p>
+            </div>
           </div>
           <div class="efca-process__item efca-reveal">
-            <h3>Progression</h3>
-            <p>Vous gagnez en autonomie et en sensations, à votre rythme.</p>
+            <div class="efca-process__img">
+              <img src="assets/img/step-progress.webp" width="800" height="1200" alt="Progression en autonomie" loading="lazy" decoding="async">
+            </div>
+            <div class="efca-process__body">
+              <h3>Progression</h3>
+              <p>Vous gagnez en autonomie et en sensations, à votre rythme.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -458,7 +478,7 @@
         <div class="efca-place__map efca-reveal" style="margin-top:var(--efca-space-lg)">
           <!-- Carte chargée en lazy ; remplacer la requête q= par un lien de la vraie fiche si besoin -->
           <iframe
-            src="https://maps.google.com/maps?q=Plage%20des%20Dauphins%20Mandelieu-la-Napoule&t=m&z=14&output=embed"
+            src="https://maps.google.com/maps?q=eFoil+C%C3%B4te+d%27Azur+Mandelieu-la-Napoule&t=m&z=15&output=embed"
             width="600" height="375" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
             title="Carte — Plage des Dauphins, Mandelieu-la-Napoule"></iframe>
         </div>
@@ -514,6 +534,43 @@
             <p>Soleil, eau turquoise et glisse silencieuse : une parenthèse premium face à la baie de Cannes, entre amis ou en famille. On vous accueille, on s'occupe de tout.</p>
             <p style="margin-top:1rem"><a class="efca-btn efca-btn--secondary" href="#galerie">Voir les photos</a></p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== REEL STRIP (nos sessions en vidéo) ===================== -->
+    <section class="efca-section" aria-labelledby="reel-strip-title">
+      <div class="efca-container">
+        <div class="efca-section__head efca-section__head--center efca-reveal">
+          <p class="efca-label">Nos sessions en vidéo</p>
+          <h2 id="reel-strip-title">Suivez-nous en action</h2>
+          <p class="efca-lead" style="color:var(--efca-color-text-muted)">Chaque jour, de nouvelles sessions sur la Côte d'Azur.</p>
+        </div>
+        <div class="efca-reel-strip-wrap">
+          <figure class="efca-reel-card">
+            <video src="assets/video/reel-saintropez.mov" poster="assets/img/reel-saintropez-poster.webp" autoplay muted loop playsinline preload="metadata"></video>
+            <figcaption>Saint-Tropez</figcaption>
+          </figure>
+          <figure class="efca-reel-card">
+            <video src="assets/video/reel-community.mov" poster="assets/img/reel-community-poster.webp" autoplay muted loop playsinline preload="metadata"></video>
+            <figcaption>La communauté eFoil</figcaption>
+          </figure>
+          <figure class="efca-reel-card">
+            <video src="assets/video/reel-station.mov" poster="assets/img/reel-station-poster.webp" autoplay muted loop playsinline preload="metadata"></video>
+            <figcaption>Session matinale</figcaption>
+          </figure>
+          <figure class="efca-reel-card">
+            <video src="assets/video/reel-islote.mov" poster="assets/img/reel-islote-poster.webp" autoplay muted loop playsinline preload="metadata"></video>
+            <figcaption>Session côtière</figcaption>
+          </figure>
+          <figure class="efca-reel-card">
+            <video src="assets/video/reel-muntanya.mov" poster="assets/img/reel-muntanya-poster.webp" autoplay muted loop playsinline preload="metadata"></video>
+            <figcaption>En mer ouverte</figcaption>
+          </figure>
+          <figure class="efca-reel-card">
+            <video src="assets/video/reel-oneword.mov" poster="assets/img/reel-oneword-poster.webp" autoplay muted loop playsinline preload="metadata"></video>
+            <figcaption>En un mot</figcaption>
+          </figure>
         </div>
       </div>
     </section>

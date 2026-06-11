@@ -784,14 +784,66 @@ p  { line-height: var(--efca-lh-base); }
 
 /* Déroulé en étapes numérotées (« Comment ça se passe ») */
 .efca-process { display: grid; gap: var(--efca-gap); counter-reset: efcastep; }
-.efca-process__item { padding-top: var(--efca-space-2xs); }
-.efca-process__item::before {
+.efca-process__item {
+  background: var(--efca-color-white);
+  border-radius: var(--efca-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--efca-shadow-sm);
+}
+.efca-process__img {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+.efca-process__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.efca-process__body { padding: var(--efca-space-sm) var(--efca-space-sm) var(--efca-space-md); }
+.efca-process__body::before {
   counter-increment: efcastep; content: counter(efcastep);
-  display: grid; place-items: center; width: 44px; height: 44px;
-  border-radius: 999px; background: var(--efca-color-primary); color: var(--efca-color-on-primary);
-  font-weight: var(--efca-fw-black); margin-bottom: var(--efca-space-2xs);
+  display: grid; place-items: center; width: 40px; height: 40px;
+  border-radius: 999px; background: var(--efca-color-accent); color: #fff;
+  font-weight: var(--efca-fw-black); font-size: 1rem; margin-bottom: var(--efca-space-2xs);
 }
 .efca-process__item h3 { font-size: var(--efca-fs-h4); margin-bottom: var(--efca-space-3xs); }
+
+/* ── REEL STRIP (style horizontal scroll — nouvelle section) ── */
+.efca-reel-strip-wrap {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  gap: var(--efca-space-sm);
+  margin-top: var(--efca-space-xl);
+  padding-bottom: var(--efca-space-xs);
+}
+.efca-reel-strip-wrap::-webkit-scrollbar { height: 4px; }
+.efca-reel-strip-wrap::-webkit-scrollbar-track { background: transparent; }
+.efca-reel-strip-wrap::-webkit-scrollbar-thumb { background: var(--efca-color-mint-200); border-radius: 99px; }
+.efca-reel-card {
+  flex: none;
+  width: clamp(200px, 22vw, 260px);
+  scroll-snap-align: start;
+  border-radius: var(--efca-radius-xl);
+  overflow: hidden;
+  background: var(--efca-color-ink);
+  box-shadow: var(--efca-shadow-md);
+}
+.efca-reel-card video {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  display: block;
+}
+.efca-reel-card figcaption {
+  padding: var(--efca-space-xs) var(--efca-space-sm);
+  font-size: var(--efca-fs-small);
+  font-weight: var(--efca-fw-semibold);
+  color: var(--efca-color-text-muted);
+  text-align: center;
+  background: var(--efca-color-white);
+}
+@media (max-width: 767px) {
+  .efca-reel-card { width: 72vw; }
+}
 
 /* Cover CTA pleine largeur (« Prêt à voler ? ») */
 .efca-cover {
