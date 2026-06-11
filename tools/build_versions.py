@@ -80,6 +80,7 @@ ALT = {
  'lieu-chateau':"Le palace Belle Époque du domaine COMO Le Beauvallon, dans les pins, au coucher du soleil.",
  'beach-aerial':"Vue aérienne du beach club du domaine : sable, parasols dorés et eau turquoise.",
  'beach-parasols':"Les parasols dorés du beach club face au golfe.",
+ 'spot-aerial':"Vue aérienne du domaine COMO Le Beauvallon : l'hôtel Belle Époque, la plage et le golfe de Saint-Tropez.",
  'exp-silence':"Des riders glissent en silence sur le golfe au coucher du soleil.",
  'exp-apesanteur':"Deux riders portés par leur aile au-dessus du golfe, devant le domaine.",
  'exp-rythme':"Un moniteur accompagne un débutant lors de ses premiers vols.",
@@ -114,6 +115,7 @@ COMMON=[
  ('MEDIA_SESSION_2',lambda: img_media('session-gear','169',A('session-gear'))),
  ('MEDIA_SESSION_3',lambda: img_media('session-water','169',A('session-water'))),
  ('MEDIA_SESSION_4',lambda: img_media('session-flight','169',A('session-flight'))),
+ ('MEDIA_SPOT',     lambda: img_media('spot-aerial','43',A('spot-aerial'))),
 ]
 GALLERY=['ride-women','ride-redrock','ride-lerins-orange','ride-formation',
          'ride-esterel','ride-yacht','ride-esterel-vert','ride-lerins-green']
@@ -133,11 +135,12 @@ DRONE_COMMON=[
  ('MEDIA_SESSION_2',lambda: img_media('drone-session-2','169',A('drone-session-2'))),
  ('MEDIA_SESSION_3',lambda: img_media('drone-session-3','169',A('drone-session-3'))),
  ('MEDIA_SESSION_4',lambda: img_media('drone-session-4','169',A('drone-session-4'))),
+ ('MEDIA_SPOT',     lambda: img_media('spot-aerial','43',A('spot-aerial'))),
 ]
 GALLERY_DRONE=['drone-ride-1','drone-ride-2','drone-ride-3','drone-ride-4',
                'drone-ride-5','drone-ride-6','drone-ride-7','drone-ride-8']
 
-V3_ORDER=['exp','slide1','lieu','gallery','spot','deroule','beach','slide2','pourqui','proof','reserver','faq']
+V3_ORDER=['exp','slide1','lieu','gallery','deroule','beach','slide2','pourqui','proof','reserver','faq','spot']
 
 EDITIONS={
  'v1-coucher-de-soleil': dict(label="Coucher de soleil", hero=('video',None)),

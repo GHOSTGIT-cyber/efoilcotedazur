@@ -46,6 +46,7 @@ JOBS = [
     ('hero-chateau','CO_chateau',(16,9),1920,.40,.5,0),
     ('hero-sunset','ST7',(16,9),1920,.60,.5,0),
     ('lieu-chateau','CO_chateau',(4,3),1280,.42,.5,0),
+    ('spot-aerial','CO_grandevue',(4,3),1280,.30,.18,0),
     ('beach-aerial','CO_dining',(16,9),1280,.5,.5,0),
     ('beach-parasols','CO_parasols',(4,3),1100,.5,.5,0),
     ('exp-silence','ST11',(16,9),1280,.55,.5,0),

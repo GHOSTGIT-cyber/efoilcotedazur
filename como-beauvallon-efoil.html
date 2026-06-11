@@ -348,7 +348,8 @@ html,body{margin:0}
 .cb-who__item .cb-num{color:var(--cb-teal-600);font-size:.9rem;letter-spacing:.2em}
 
 /* ── Section SPOT (carte + NAP) ───────────────────────────────────────────── */
-.cb-spot{display:grid;grid-template-columns:1fr;gap:clamp(36px,5vw,64px);align-items:stretch}
+.cb-spot{display:grid;grid-template-columns:1fr;gap:clamp(36px,5vw,64px);align-items:center}
+.cb-spot__media{overflow:hidden}
 @media(min-width:900px){.cb-spot{grid-template-columns:1.05fr .95fr}}
 .cb-spot h2{font-size:clamp(2rem,4.6vw,3.6rem);color:var(--cb-teal-900);max-width:13ch;margin-top:1rem}
 .cb-spot p{margin-top:1.4rem}
@@ -687,37 +688,6 @@ html,body{margin:0}
     </div>
   </section>
 
-  <!-- ══════════════════ 6 · LE SPOT ══════════════════ -->
-  <section class="cb-section" id="cb-spot" aria-labelledby="cb-spot-h">
-    <div class="cb-wrap">
-      <div class="cb-spot">
-        <div class="cb-spot__txt">
-          <p class="cb-eyebrow">Le spot</p>
-          <h2 id="cb-spot-h" class="cb-display cb-reveal">
-            <span class="cb-line"><span class="cb-line__in">Le golfe,</span></span>
-            <span class="cb-line"><span class="cb-line__in">taillé pour le foil</span></span>
-          </h2>
-          <p class="cb-body cb-fade">Le golfe de Saint-Tropez offre ce que le foil demande : une baie abritée, peu de houle, une eau lisse au petit matin. On s'élance du ponton, on glisse, on rentre. La lumière fait le reste.</p>
-          <dl class="cb-nap cb-fade">
-            <dt>Adresse</dt>
-            <dd>Base eFoil — au départ du ponton du domaine COMO Le Beauvallon<br>Boulevard des Collines, 83310 Grimaud <!-- n° de voie : à confirmer --></dd>
-            <dt>Téléphone</dt>
-            <dd><a class="cb-link cb-ul" href="tel:{{TÉLÉPHONE_E164}}">{{TÉLÉPHONE}}</a> <!-- à confirmer avant prod --></dd>
-            <dt>Accès</dt>
-            <dd>Golfe de Saint-Tropez · 8 min de Saint-Tropez par la mer</dd>
-          </dl>
-        </div>
-        <!-- Production : remplacer le .cb-ph par une <iframe ... loading="lazy"> Google Maps -->
-        <div class="cb-spot__map cb-fade" aria-label="Carte de localisation">
-          <div class="cb-ph cb-ph--light" role="img" aria-label="Carte : domaine COMO Le Beauvallon sur le golfe de Saint-Tropez, commune de Grimaud">
-            <div class="cb-ph__inner"><span class="cb-ph__tag">CARTE</span>
-              <span class="cb-ph__meta">iframe lazy · Grimaud · golfe de Saint-Tropez</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ══════════════════ 7 · GALERIE horizontale draggable ══════════════════
        MEDIA_RIDE_1..n — mix portrait/paysage — détail rider, matériel Lift, le spot à différentes lumières -->
   <section class="cb-section cb-paper" aria-labelledby="cb-gal-h">
@@ -905,6 +875,34 @@ html,body{margin:0}
         <summary>Y a-t-il un âge minimum ?</summary>
         <div class="cb-faq__a">L'eFoil est ouvert à partir de {{ÂGE_MINI}} ans, sous conditions (autorisation parentale pour les mineurs, aisance dans l'eau). N'hésitez pas à nous contacter pour les cas particuliers.</div>
       </details>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 12 ter · LE SPOT (déplacé en fin de page) ══════════════════
+       MEDIA_SPOT (4:3) = vue AÉRIENNE du domaine avec l'hôtel -->
+  <section class="cb-section" id="cb-spot" aria-labelledby="cb-spot-h">
+    <div class="cb-wrap">
+      <div class="cb-spot">
+        <div class="cb-spot__txt">
+          <p class="cb-eyebrow">Le spot</p>
+          <h2 id="cb-spot-h" class="cb-display cb-reveal">
+            <span class="cb-line"><span class="cb-line__in">Le golfe,</span></span>
+            <span class="cb-line"><span class="cb-line__in">taillé pour le foil</span></span>
+          </h2>
+          <p class="cb-body cb-fade">Le golfe de Saint-Tropez offre ce que le foil demande : une baie abritée, peu de houle, une eau lisse au petit matin. On s'élance du ponton du domaine, on glisse, on rentre. La lumière fait le reste.</p>
+          <dl class="cb-nap cb-fade">
+            <dt>Adresse</dt>
+            <dd>Base eFoil — au départ du ponton du domaine COMO Le Beauvallon<br>Boulevard des Collines, 83310 Grimaud <!-- n° de voie : à confirmer --></dd>
+            <dt>Téléphone</dt>
+            <dd><a class="cb-link cb-ul" href="tel:{{TÉLÉPHONE_E164}}">{{TÉLÉPHONE}}</a></dd>
+            <dt>Accès &amp; carte</dt>
+            <dd>Golfe de Saint-Tropez · 8 min de Saint-Tropez par la mer — <a class="cb-link cb-ul" href="{{LIEN_MAPS}}">voir sur la carte</a></dd>
+          </dl>
+        </div>
+        <figure class="cb-spot__media cb-fade">
+          <div class="cb-ph cb-ratio-43" role="img" aria-label="Vue aérienne du domaine COMO Le Beauvallon — l'hôtel Belle Époque, la plage et le golfe"><div class="cb-ph__inner"><span class="cb-ph__tag">MEDIA_SPOT</span><span class="cb-ph__meta">vue aérienne · l'hôtel</span></div></div>
+        </figure>
+      </div>
     </div>
   </section>
 
