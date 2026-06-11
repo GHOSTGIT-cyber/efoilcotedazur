@@ -315,6 +315,15 @@ html,body{margin:0}
 .cb-breath p{font-family:var(--cb-ff-display);font-stretch:118%;font-weight:200;text-transform:uppercase;
   letter-spacing:.03em;line-height:1;color:var(--cb-white);font-size:clamp(1.8rem,5vw,4rem);max-width:18ch}
 
+/* ── Galerie AUTO (slides aléatoires) — remplace les bandeaux photo ────────── */
+.cb-slideshow{position:relative;min-height:62vh;min-height:62svh;overflow:hidden;background:var(--cb-espresso)}
+.cb-slideshow__stage{position:absolute;inset:0;z-index:0}
+.cb-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.5s ease;will-change:opacity}
+.cb-slide.cb-slide--on{opacity:1}
+.cb-slideshow__veil{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(20,18,15,.05),rgba(20,18,15,.22))}
+@media(prefers-reduced-motion:reduce){.cb-slide{transition:none}}
+@media(max-width:768px){.cb-slideshow{min-height:48vh;min-height:48svh}}
+
 /* ── Section EXPÉRIENCE (image-led, défilement normal — aucun scroll bloquant) ── */
 .cb-exp__intro{max-width:44ch}
 .cb-exp__row{display:grid;grid-template-columns:1fr;gap:clamp(24px,4vw,52px);align-items:center;margin-top:clamp(42px,6.5vw,86px)}
@@ -479,9 +488,10 @@ html,body{margin:0}
 .cb-beach__list li{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cb-teal-700);
   font-family:var(--cb-ff-display);font-stretch:104%;display:flex;align-items:center;gap:.6em}
 .cb-beach__list li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--cb-gold)}
-.cb-beach__grid{margin-top:clamp(34px,5vw,60px);display:grid;grid-template-columns:1fr;gap:clamp(16px,2vw,26px)}
-@media(min-width:760px){.cb-beach__grid{grid-template-columns:1.32fr .68fr;align-items:end}}
-.cb-beach__fig{overflow:hidden}
+.cb-beach__grid{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,52px);align-items:center}
+@media(min-width:820px){.cb-beach__grid{grid-template-columns:1.04fr .96fr}}
+.cb-beach__wide{margin-top:clamp(22px,3vw,42px);overflow:hidden}
+.cb-beach__fig,.cb-beach__wide{overflow:hidden}
 .cb-beach__fig .cb-ph{height:100%}
 /* L'UNIQUE glint turquoise Lift de toute la page (clin d'œil foil) */
 .cb-glint-dot{display:inline-block;width:.5em;height:.5em;border-radius:50%;background:var(--cb-glint);
@@ -589,51 +599,13 @@ html,body{margin:0}
     </div>
   </section>
 
-  <!-- ══════════════════ 2 bis · LE BEACH CLUB ══════════════════
-       Pont entre l'univers hôtel COMO et l'eFoil — cœur de l'ambiance été.
-       MEDIA_BEACH_1 (16:9) transats/parasols sur le sable, golden hour ;
-       MEDIA_BEACH_2 (3:4) le ponton privé.
-       Réf. grade : beach club COMO « Beauvallon Sur Mer » (sable, parasols, mer).
-       ⚠️ Droits image COMO à clearer avant mise en ligne publique. -->
-  <section class="cb-section cb-paper cb-beach" aria-labelledby="cb-beach-h">
-    <div class="cb-wrap">
-      <p class="cb-eyebrow">Le beach club</p>
-      <h2 id="cb-beach-h" class="cb-display cb-reveal">
-        <span class="cb-line"><span class="cb-line__in">Le pied dans le sable,</span></span>
-        <span class="cb-line"><span class="cb-line__in">l'œil sur le large</span></span>
-      </h2>
-      <p class="cb-body cb-beach__lead cb-fade">Transats, parasols, le sable chaud et le golfe en toile de fond. La session commence ici, au beach club du domaine : on quitte la pinède, on rejoint le ponton, on s'élance. Le rituel d'un été sur la Riviera.</p>
-      <ul class="cb-beach__list cb-fade">
-        <li>Transats &amp; parasols</li><li>Sable &amp; pinède</li><li>Ponton privé</li><li>Esprit Riviera</li>
-      </ul>
-      <div class="cb-beach__grid">
-        <figure class="cb-beach__fig cb-parallax cb-fade">
-          <div class="cb-ph cb-ratio-169" role="img" aria-label="Transats et parasols sur le sable du beach club, golfe de Saint-Tropez à la golden hour">
-            <div class="cb-ph__inner"><span class="cb-ph__tag">MEDIA_BEACH_1</span><span class="cb-ph__meta">16:9 · transats · parasols · sable</span></div>
-          </div>
-        </figure>
-        <figure class="cb-beach__fig cb-fade">
-          <div class="cb-ph cb-ratio-34" role="img" aria-label="Le ponton privé du domaine, point de départ des sessions eFoil">
-            <div class="cb-ph__inner"><span class="cb-ph__tag">MEDIA_BEACH_2</span><span class="cb-ph__meta">3:4 · ponton privé</span></div>
-          </div>
-        </figure>
-      </div>
+  <!-- ══════════════════ 3 · GALERIE AUTO #1 (slides aléatoires) ══════════════════
+       MEDIA_SLIDE_1 = image de repli (no-JS) ; le JS enchaîne des slides aléatoires du pool medias/web/pool/ -->
+  <section class="cb-slideshow cb-bleed cb-ink-on" data-cb-slideshow aria-label="Le golfe et les riders en images — défilement automatique">
+    <div class="cb-slideshow__stage">
+      <div class="cb-ph" role="img" aria-label="Vues aériennes du golfe et riders en eFoil"><div class="cb-ph__inner"><span class="cb-ph__tag">MEDIA_SLIDE_1</span><span class="cb-ph__meta">galerie auto</span></div></div>
     </div>
-  </section>
-
-  <!-- ══════════════════ 3 · RESPIRATION VIDÉO #1 ══════════════════
-       MEDIA_BROLL_1 — 16:9 — la lame du mât qui trace une ligne nette, eau calme, reflets dorés -->
-  <section class="cb-breath cb-bleed cb-ink-on" aria-label="Respiration visuelle">
-    <div class="cb-breath__media">
-      <div class="cb-ph" role="img" aria-label="Gros plan : la lame du mât du foil tranche la surface calme de l'eau">
-        <div class="cb-ph__inner"><span class="cb-ph__tag">MEDIA_BROLL_1</span>
-          <span class="cb-ph__meta">16:9 · la lame trace une ligne nette</span></div>
-      </div>
-    </div>
-    <div class="cb-breath__veil"></div>
-    <div class="cb-breath__inner">
-      <p class="cb-reveal"><span class="cb-line"><span class="cb-line__in">La lame du mât trace</span></span><span class="cb-line"><span class="cb-line__in">une ligne nette sur l'eau.</span></span></p>
-    </div>
+    <div class="cb-slideshow__veil"></div>
   </section>
 
   <!-- ══════════════════ 4 · L'EXPÉRIENCE (image-led, défilement normal) ══════════════════
@@ -818,18 +790,39 @@ html,body{margin:0}
     </div>
   </section>
 
-  <!-- ══════════════════ 9 · RESPIRATION VIDÉO #2 (montée vers le CTA) ══════════════════
-       MEDIA_BROLL_2 — 16:9 — rider minuscule dans un vaste seascape calme, golden hour -->
-  <section class="cb-breath cb-bleed cb-ink-on" aria-label="Respiration visuelle">
-    <div class="cb-breath__media">
-      <div class="cb-ph" role="img" aria-label="Un rider minuscule dans l'immensité calme du golfe, à la golden hour">
-        <div class="cb-ph__inner"><span class="cb-ph__tag">MEDIA_BROLL_2</span>
-          <span class="cb-ph__meta">16:9 · vaste seascape · golden hour</span></div>
-      </div>
+  <!-- ══════════════════ 9 · GALERIE AUTO #2 (slides aléatoires) ══════════════════
+       MEDIA_SLIDE_2 = image de repli (no-JS) ; slides aléatoires du pool -->
+  <section class="cb-slideshow cb-bleed cb-ink-on" data-cb-slideshow aria-label="Le golfe et les riders en images — défilement automatique">
+    <div class="cb-slideshow__stage">
+      <div class="cb-ph" role="img" aria-label="Vues aériennes du golfe et riders en eFoil"><div class="cb-ph__inner"><span class="cb-ph__tag">MEDIA_SLIDE_2</span><span class="cb-ph__meta">galerie auto</span></div></div>
     </div>
-    <div class="cb-breath__veil"></div>
-    <div class="cb-breath__inner">
-      <p class="cb-reveal"><span class="cb-line"><span class="cb-line__in">Il reste à choisir</span></span><span class="cb-line"><span class="cb-line__in">votre heure.</span></span></p>
+    <div class="cb-slideshow__veil"></div>
+  </section>
+
+  <!-- ══════════════════ 9 bis · LE BEACH CLUB (juste avant les avis) ══════════════════
+       MEDIA_BEACH_1 (16:9) vue AÉRIENNE beach club COMO (sable, parasols) ;
+       MEDIA_BEACH_2 (4:3) parasols dorés. ⚠️ Droits image COMO à clearer. -->
+  <section class="cb-section cb-paper cb-beach" id="cb-beach" aria-labelledby="cb-beach-h">
+    <div class="cb-wrap">
+      <div class="cb-beach__grid">
+        <div class="cb-beach__txt">
+          <p class="cb-eyebrow">Le beach club</p>
+          <h2 id="cb-beach-h" class="cb-display cb-reveal">
+            <span class="cb-line"><span class="cb-line__in">Le pied dans le sable,</span></span>
+            <span class="cb-line"><span class="cb-line__in">l'œil sur le large</span></span>
+          </h2>
+          <p class="cb-body cb-beach__lead cb-fade">Transats, parasols, le sable chaud et le golfe en toile de fond. Avant ou après la session, on s'attarde au beach club du domaine. Le rituel d'un été sur la Riviera.</p>
+          <ul class="cb-beach__list cb-fade">
+            <li>Transats &amp; parasols</li><li>Sable &amp; pinède</li><li>Ponton privé</li><li>Esprit Riviera</li>
+          </ul>
+        </div>
+        <figure class="cb-beach__fig cb-fade">
+          <div class="cb-ph cb-ratio-43" role="img" aria-label="Les parasols dorés du beach club face au golfe"><div class="cb-ph__inner"><span class="cb-ph__tag">MEDIA_BEACH_2</span><span class="cb-ph__meta">4:3 · parasols</span></div></div>
+        </figure>
+      </div>
+      <figure class="cb-beach__wide cb-fade">
+        <div class="cb-ph cb-ratio-169" role="img" aria-label="Vue aérienne du beach club : sable, parasols dorés et eau turquoise"><div class="cb-ph__inner"><span class="cb-ph__tag">MEDIA_BEACH_1</span><span class="cb-ph__meta">16:9 · vue aérienne</span></div></div>
+      </figure>
     </div>
   </section>
 
@@ -1036,6 +1029,7 @@ html,body{margin:0}
     initYear();
     initInkObserver();
     initAutoplayVideo();
+    initSlideshow();
 
     var REDUCED=!(window.matchMedia&&matchMedia('(prefers-reduced-motion: no-preference)').matches);
     var GSAP=window.gsap, ST=window.ScrollTrigger;
@@ -1116,6 +1110,29 @@ html,body{margin:0}
     if(!(window.matchMedia&&matchMedia('(min-width:769px) and (prefers-reduced-motion: no-preference)').matches)) return;
     document.querySelectorAll('video[data-cb-autoplay]').forEach(function(v){
       try{ v.muted=true; var p=v.play(); if(p&&p.catch) p.catch(function(){}); }catch(e){}
+    });
+  }
+  /* Galerie auto : enchaîne des slides aléatoires du pool (window.CB_POOL) en crossfade.
+     Repli no-JS / reduced-motion = la 1re image (de repli) reste affichée. */
+  function initSlideshow(){
+    var pool=(window.CB_POOL||[]);
+    var boxes=document.querySelectorAll('[data-cb-slideshow]'); if(!boxes.length||!pool.length) return;
+    if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: no-preference)').matches)) return;
+    boxes.forEach(function(box,bi){
+      var stage=box.querySelector('.cb-slideshow__stage'); if(!stage) return;
+      var first=stage.querySelector('.cb-slide'); if(!first) return;
+      var order=pool.slice();
+      for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;}
+      var layerB=document.createElement('img');
+      layerB.className='cb-slide'; layerB.alt=''; layerB.decoding='async'; layerB.loading='lazy';
+      stage.appendChild(layerB);
+      var cur=first, nxt=layerB, idx=0, visible=true;
+      function swap(){ nxt.classList.add('cb-slide--on'); cur.classList.remove('cb-slide--on'); var t=cur;cur=nxt;nxt=t; }
+      function step(){ idx=(idx+1)%order.length; nxt.onload=swap; nxt.onerror=function(){}; nxt.src=order[idx]; if(nxt.complete&&nxt.naturalWidth) swap(); }
+      setInterval(function(){ if(visible) step(); }, 4800+bi*900);
+      if('IntersectionObserver' in window){
+        new IntersectionObserver(function(es){ visible=es[0].isIntersecting; },{threshold:0.01}).observe(box);
+      }
     });
   }
 

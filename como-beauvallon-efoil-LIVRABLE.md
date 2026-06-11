@@ -24,9 +24,9 @@ les woff2 ne sont pas déposés).
 |---|---|---|
 | `como-beauvallon-v1-coucher-de-soleil.html` | **Vidéo drone au coucher du soleil** (boucle compressée 11,7 Mo + poster) — riders sur le golfe | la plus spectaculaire |
 | `como-beauvallon-v2-le-domaine.html` | **Grande vue aérienne COMO** (le château Belle Époque + ponton + golfe) | patrimoniale |
-| `como-beauvallon-v3-escapade.html` | Formation au-dessus du golfe | dynamique / scénique |
+| `como-beauvallon-v3-escapade.html` | **Le château** (palace Belle Époque, golden hour) + **ordre des blocs revu** | dynamique / scénique |
 
-**Communes aux 3** : Lieu = **château COMO** (golden hour) · Beach club = **parasols/transats COMO** · Expérience = 3 images (silence / apesanteur / à votre rythme), **section image-led, plus aucun scroll bloquant** · Galerie horizontale = **8 plans** (Beauvallon, Lérins, Estérel, yachts de Cannes) · Déroulé = briefing → équipement → à l'eau → vol.
+**Communes aux 3** : Lieu = **château COMO** · Beach club = **vue aérienne + parasols COMO** (déplacé **juste avant les avis**) · Expérience = 3 images, défilement normal (**aucun scroll bloquant**) · **2 galeries AUTO** (slides aléatoires en crossfade, pool de **116 images** — riders + vues aériennes des vidéos) à la place des anciens bandeaux photo · Galerie horizontale draggable = 8 plans · Déroulé = briefing → équipement → à l'eau → vol. Grade chaud subtil sur les plans plein-jour, voiles dé-orangés.
 
 **Médias exploités** : tes photos (`medias/`) + **images COMO** (grande vue, château, beach club — `medias/como-web/`, droits à clearer) + **frames extraites des vidéos** (drone sunset, yachts, Estérel) + **boucle vidéo compressée** (`medias/web/hero-video.mp4`).
 

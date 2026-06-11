@@ -315,6 +315,15 @@ html,body{margin:0}
 .cb-breath p{font-family:var(--cb-ff-display);font-stretch:118%;font-weight:200;text-transform:uppercase;
   letter-spacing:.03em;line-height:1;color:var(--cb-white);font-size:clamp(1.8rem,5vw,4rem);max-width:18ch}
 
+/* ── Galerie AUTO (slides aléatoires) — remplace les bandeaux photo ────────── */
+.cb-slideshow{position:relative;min-height:62vh;min-height:62svh;overflow:hidden;background:var(--cb-espresso)}
+.cb-slideshow__stage{position:absolute;inset:0;z-index:0}
+.cb-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.5s ease;will-change:opacity}
+.cb-slide.cb-slide--on{opacity:1}
+.cb-slideshow__veil{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(20,18,15,.05),rgba(20,18,15,.22))}
+@media(prefers-reduced-motion:reduce){.cb-slide{transition:none}}
+@media(max-width:768px){.cb-slideshow{min-height:48vh;min-height:48svh}}
+
 /* ── Section EXPÉRIENCE (image-led, défilement normal — aucun scroll bloquant) ── */
 .cb-exp__intro{max-width:44ch}
 .cb-exp__row{display:grid;grid-template-columns:1fr;gap:clamp(24px,4vw,52px);align-items:center;margin-top:clamp(42px,6.5vw,86px)}
@@ -479,9 +488,10 @@ html,body{margin:0}
 .cb-beach__list li{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cb-teal-700);
   font-family:var(--cb-ff-display);font-stretch:104%;display:flex;align-items:center;gap:.6em}
 .cb-beach__list li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--cb-gold)}
-.cb-beach__grid{margin-top:clamp(34px,5vw,60px);display:grid;grid-template-columns:1fr;gap:clamp(16px,2vw,26px)}
-@media(min-width:760px){.cb-beach__grid{grid-template-columns:1.32fr .68fr;align-items:end}}
-.cb-beach__fig{overflow:hidden}
+.cb-beach__grid{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,52px);align-items:center}
+@media(min-width:820px){.cb-beach__grid{grid-template-columns:1.04fr .96fr}}
+.cb-beach__wide{margin-top:clamp(22px,3vw,42px);overflow:hidden}
+.cb-beach__fig,.cb-beach__wide{overflow:hidden}
 .cb-beach__fig .cb-ph{height:100%}
 /* L'UNIQUE glint turquoise Lift de toute la page (clin d'œil foil) */
 .cb-glint-dot{display:inline-block;width:.5em;height:.5em;border-radius:50%;background:var(--cb-glint);
@@ -583,44 +593,13 @@ html,body{margin:0}
     </div>
   </section>
 
-  <!-- ══════════════════ 2 bis · LE BEACH CLUB ══════════════════
-       Pont entre l'univers hôtel COMO et l'eFoil — cœur de l'ambiance été.
-       MEDIA_BEACH_1 (16:9) transats/parasols sur le sable, golden hour ;
-       MEDIA_BEACH_2 (3:4) le ponton privé.
-       Réf. grade : beach club COMO « Beauvallon Sur Mer » (sable, parasols, mer).
-       ⚠️ Droits image COMO à clearer avant mise en ligne publique. -->
-  <section class="cb-section cb-paper cb-beach" aria-labelledby="cb-beach-h">
-    <div class="cb-wrap">
-      <p class="cb-eyebrow">Le beach club</p>
-      <h2 id="cb-beach-h" class="cb-display cb-reveal">
-        <span class="cb-line"><span class="cb-line__in">Le pied dans le sable,</span></span>
-        <span class="cb-line"><span class="cb-line__in">l'œil sur le large</span></span>
-      </h2>
-      <p class="cb-body cb-beach__lead cb-fade">Transats, parasols, le sable chaud et le golfe en toile de fond. La session commence ici, au beach club du domaine : on quitte la pinède, on rejoint le ponton, on s'élance. Le rituel d'un été sur la Riviera.</p>
-      <ul class="cb-beach__list cb-fade">
-        <li>Transats &amp; parasols</li><li>Sable &amp; pinède</li><li>Ponton privé</li><li>Esprit Riviera</li>
-      </ul>
-      <div class="cb-beach__grid">
-        <figure class="cb-beach__fig cb-fade">
-          <img class="cb-media cb-ratio-169" src="medias/web/beach-parasols.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Le beach club du domaine : parasols dorés et vue sur le golfe de Saint-Tropez.">
-        </figure>
-        <figure class="cb-beach__fig cb-fade">
-          <img class="cb-media cb-ratio-34" src="medias/web/beach-loungers.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Transats et parasols du beach club face à la mer.">
-        </figure>
-      </div>
+  <!-- ══════════════════ 3 · GALERIE AUTO #1 (slides aléatoires) ══════════════════
+       MEDIA_SLIDE_1 = image de repli (no-JS) ; le JS enchaîne des slides aléatoires du pool medias/web/pool/ -->
+  <section class="cb-slideshow cb-bleed cb-ink-on" data-cb-slideshow aria-label="Le golfe et les riders en images — défilement automatique">
+    <div class="cb-slideshow__stage">
+      <img class="cb-fill cb-slide cb-slide--on" src="medias/web/breath-sunset.webp" width="1920" height="1080" loading="lazy" decoding="async" alt="Vue drone : des riders en eFoil sur le golfe au coucher du soleil.">
     </div>
-  </section>
-
-  <!-- ══════════════════ 3 · RESPIRATION VIDÉO #1 ══════════════════
-       MEDIA_BROLL_1 — 16:9 — la lame du mât qui trace une ligne nette, eau calme, reflets dorés -->
-  <section class="cb-breath cb-bleed cb-ink-on" aria-label="Respiration visuelle">
-    <div class="cb-breath__media">
-      <img class="cb-fill" src="medias/web/breath-redrock.webp" width="1920" height="1080" loading="lazy" decoding="async" alt="Riders en vol devant les roches rouges de l'Estérel.">
-    </div>
-    <div class="cb-breath__veil"></div>
-    <div class="cb-breath__inner">
-      <p class="cb-reveal"><span class="cb-line"><span class="cb-line__in">La lame du mât trace</span></span><span class="cb-line"><span class="cb-line__in">une ligne nette sur l'eau.</span></span></p>
-    </div>
+    <div class="cb-slideshow__veil"></div>
   </section>
 
   <!-- ══════════════════ 4 · L'EXPÉRIENCE (image-led, défilement normal) ══════════════════
@@ -805,15 +784,39 @@ html,body{margin:0}
     </div>
   </section>
 
-  <!-- ══════════════════ 9 · RESPIRATION VIDÉO #2 (montée vers le CTA) ══════════════════
-       MEDIA_BROLL_2 — 16:9 — rider minuscule dans un vaste seascape calme, golden hour -->
-  <section class="cb-breath cb-bleed cb-ink-on" aria-label="Respiration visuelle">
-    <div class="cb-breath__media">
-      <img class="cb-fill" src="medias/web/breath-golfe.webp" width="1920" height="1080" loading="lazy" decoding="async" alt="Riders en vol sur l'eau calme du golfe.">
+  <!-- ══════════════════ 9 · GALERIE AUTO #2 (slides aléatoires) ══════════════════
+       MEDIA_SLIDE_2 = image de repli (no-JS) ; slides aléatoires du pool -->
+  <section class="cb-slideshow cb-bleed cb-ink-on" data-cb-slideshow aria-label="Le golfe et les riders en images — défilement automatique">
+    <div class="cb-slideshow__stage">
+      <img class="cb-fill cb-slide cb-slide--on" src="medias/web/breath-golfe.webp" width="1920" height="1080" loading="lazy" decoding="async" alt="Riders en vol au-dessus du golfe.">
     </div>
-    <div class="cb-breath__veil"></div>
-    <div class="cb-breath__inner">
-      <p class="cb-reveal"><span class="cb-line"><span class="cb-line__in">Il reste à choisir</span></span><span class="cb-line"><span class="cb-line__in">votre heure.</span></span></p>
+    <div class="cb-slideshow__veil"></div>
+  </section>
+
+  <!-- ══════════════════ 9 bis · LE BEACH CLUB (juste avant les avis) ══════════════════
+       MEDIA_BEACH_1 (16:9) vue AÉRIENNE beach club COMO (sable, parasols) ;
+       MEDIA_BEACH_2 (4:3) parasols dorés. ⚠️ Droits image COMO à clearer. -->
+  <section class="cb-section cb-paper cb-beach" id="cb-beach" aria-labelledby="cb-beach-h">
+    <div class="cb-wrap">
+      <div class="cb-beach__grid">
+        <div class="cb-beach__txt">
+          <p class="cb-eyebrow">Le beach club</p>
+          <h2 id="cb-beach-h" class="cb-display cb-reveal">
+            <span class="cb-line"><span class="cb-line__in">Le pied dans le sable,</span></span>
+            <span class="cb-line"><span class="cb-line__in">l'œil sur le large</span></span>
+          </h2>
+          <p class="cb-body cb-beach__lead cb-fade">Transats, parasols, le sable chaud et le golfe en toile de fond. Avant ou après la session, on s'attarde au beach club du domaine. Le rituel d'un été sur la Riviera.</p>
+          <ul class="cb-beach__list cb-fade">
+            <li>Transats &amp; parasols</li><li>Sable &amp; pinède</li><li>Ponton privé</li><li>Esprit Riviera</li>
+          </ul>
+        </div>
+        <figure class="cb-beach__fig cb-fade">
+          <img class="cb-media cb-ratio-43" src="medias/web/beach-parasols.webp" width="1100" height="825" loading="lazy" decoding="async" alt="Les parasols dorés du beach club face au golfe.">
+        </figure>
+      </div>
+      <figure class="cb-beach__wide cb-fade">
+        <img class="cb-media cb-ratio-169" src="medias/web/beach-aerial.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Vue aérienne du beach club du domaine : sable, parasols dorés et eau turquoise.">
+      </figure>
     </div>
   </section>
 
@@ -991,6 +994,7 @@ html,body{margin:0}
 }
 </script>
 
+<script>window.CB_POOL=["medias/web/pool/auto-aw-02.webp", "medias/web/pool/auto-aw-06.webp", "medias/web/pool/auto-aw-10.webp", "medias/web/pool/auto-aw-14.webp", "medias/web/pool/auto-aw-18.webp", "medias/web/pool/auto-aw-22.webp", "medias/web/pool/auto-aw-26.webp", "medias/web/pool/auto-aw-30.webp", "medias/web/pool/auto-aw-34.webp", "medias/web/pool/auto-aw-38.webp", "medias/web/pool/auto-aw-42.webp", "medias/web/pool/auto-aw-46.webp", "medias/web/pool/auto-aw-50.webp", "medias/web/pool/auto-aw-54.webp", "medias/web/pool/auto-aw-58.webp", "medias/web/pool/auto-fo-02.webp", "medias/web/pool/auto-fo-05.webp", "medias/web/pool/auto-fo-08.webp", "medias/web/pool/auto-fo-11.webp", "medias/web/pool/auto-fo-14.webp", "medias/web/pool/auto-fo-17.webp", "medias/web/pool/auto-fo-20.webp", "medias/web/pool/auto-pu-02.webp", "medias/web/pool/auto-pu-05.webp", "medias/web/pool/auto-pu-08.webp", "medias/web/pool/auto-pu-11.webp", "medias/web/pool/auto-pu-14.webp", "medias/web/pool/auto-pu-17.webp", "medias/web/pool/auto-res-03.webp", "medias/web/pool/auto-res-09.webp", "medias/web/pool/auto-res-15.webp", "medias/web/pool/auto-res-21.webp", "medias/web/pool/auto-res-27.webp", "medias/web/pool/auto-res-39.webp", "medias/web/pool/auto-res-45.webp", "medias/web/pool/auto-res-51.webp", "medias/web/pool/auto-res-57.webp", "medias/web/pool/auto-res-63.webp", "medias/web/pool/auto-to-02.webp", "medias/web/pool/auto-to-05.webp", "medias/web/pool/auto-to-08.webp", "medias/web/pool/auto-to-11.webp", "medias/web/pool/auto-to-14.webp", "medias/web/pool/auto-ve-03.webp", "medias/web/pool/auto-ve-09.webp", "medias/web/pool/auto-ve-15.webp", "medias/web/pool/auto-ve-21.webp", "medias/web/pool/auto-ve-27.webp", "medias/web/pool/auto-ve-33.webp", "medias/web/pool/auto-ve-39.webp", "medias/web/pool/auto-ve-45.webp", "medias/web/pool/auto-ve-51.webp", "medias/web/pool/auto-ve-57.webp", "medias/web/pool/cannes-cannes-cote-103.webp", "medias/web/pool/cannes-cannes-cote-109.webp", "medias/web/pool/cannes-cannes-cote-110.webp", "medias/web/pool/cannes-cannes-cote-118.webp", "medias/web/pool/cannes-cannes-cote-120.webp", "medias/web/pool/cannes-cannes-cote-125.webp", "medias/web/pool/cannes-cannes-cote-126.webp", "medias/web/pool/cannes-cannes-cote-129.webp", "medias/web/pool/cannes-cannes-cote-131.webp", "medias/web/pool/cannes-cannes-cote-134.webp", "medias/web/pool/cannes-cannes-cote-135.webp", "medias/web/pool/cannes-cannes-cote-146.webp", "medias/web/pool/cannes-cannes-cote-153.webp", "medias/web/pool/cannes-cannes-cote-155.webp", "medias/web/pool/cannes-cannes-cote-161.webp", "medias/web/pool/cannes-cannes-cote-162.webp", "medias/web/pool/cannes-cannes-cote-164.webp", "medias/web/pool/cannes-cannes-cote-167.webp", "medias/web/pool/cannes-cannes-cote-172.webp", "medias/web/pool/cannes-cannes-cote-173.webp", "medias/web/pool/cannes-cannes-cote-177.webp", "medias/web/pool/cannes-cannes-cote-180.webp", "medias/web/pool/cannes-cannes-cote-182.webp", "medias/web/pool/cannes-cannes-cote-184.webp", "medias/web/pool/cannes-cannes-cote-187.webp", "medias/web/pool/cannes-cannes-cote-189.webp", "medias/web/pool/cannes-cannes-cote-190.webp", "medias/web/pool/cannes-cannes-cote-194.webp", "medias/web/pool/cannes-cannes-cote-2.webp", "medias/web/pool/cannes-cannes-cote-22.webp", "medias/web/pool/cannes-cannes-cote-3.webp", "medias/web/pool/cannes-cannes-cote-30.webp", "medias/web/pool/cannes-cannes-cote-36.webp", "medias/web/pool/cannes-cannes-cote-4.webp", "medias/web/pool/cannes-cannes-cote-45.webp", "medias/web/pool/cannes-cannes-cote-50.webp", "medias/web/pool/cannes-cannes-cote-53.webp", "medias/web/pool/cannes-cannes-cote-56.webp", "medias/web/pool/cannes-cannes-cote-57.webp", "medias/web/pool/cannes-cannes-cote-58.webp", "medias/web/pool/cannes-cannes-cote-61.webp", "medias/web/pool/cannes-cannes-cote-64.webp", "medias/web/pool/cannes-cannes-cote-73.webp", "medias/web/pool/cannes-cannes-cote-83-1.webp", "medias/web/pool/cannes-cannes-cote-83.webp", "medias/web/pool/cannes-cannes-cote-85.webp", "medias/web/pool/cannes-cannes-cote-86.webp", "medias/web/pool/cannes-cannes-cote-90.webp", "medias/web/pool/cannes-cannes-cote-94.webp", "medias/web/pool/cannes-cannes-cote-96.webp", "medias/web/pool/cannes-cannes-cote-99.webp", "medias/web/pool/cannes-cannes-day1-2.webp", "medias/web/pool/cannes-cannes-day1-4.webp", "medias/web/pool/como-beauvallon-19a1d93b-24c7-4ce7-8e34-fc634e6ce764.webp", "medias/web/pool/como-beauvallon-6f9dea10-981b-4b23-8fde-4a21f87acd52.webp", "medias/web/pool/como-beauvallon-a715426f-04a3-4407-abce-65a7dffb1f08.webp", "medias/web/pool/esterel-post-4x5-5-1.webp", "medias/web/pool/esterel-post-4x5-5.webp", "medias/web/pool/iles-lerins-post-4x5-24-three.webp", "medias/web/pool/iles-lerins-post-4x5-25-secondd.webp", "medias/web/pool/iles-lerins-post-4x5-26-first.webp", "medias/web/pool/saint-tropez-stropez-day2-11.webp", "medias/web/pool/saint-tropez-stropez-day2-7.webp"];</script>
 <!-- ══ GSAP + ScrollTrigger (lib d'animation, defer). Fallback : si le CDN est bloqué,
         l'init révèle tout le contenu. Pour 100% self-host : télécharger en /vendor/. ══ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
@@ -1020,6 +1024,7 @@ html,body{margin:0}
     initYear();
     initInkObserver();
     initAutoplayVideo();
+    initSlideshow();
 
     var REDUCED=!(window.matchMedia&&matchMedia('(prefers-reduced-motion: no-preference)').matches);
     var GSAP=window.gsap, ST=window.ScrollTrigger;
@@ -1100,6 +1105,29 @@ html,body{margin:0}
     if(!(window.matchMedia&&matchMedia('(min-width:769px) and (prefers-reduced-motion: no-preference)').matches)) return;
     document.querySelectorAll('video[data-cb-autoplay]').forEach(function(v){
       try{ v.muted=true; var p=v.play(); if(p&&p.catch) p.catch(function(){}); }catch(e){}
+    });
+  }
+  /* Galerie auto : enchaîne des slides aléatoires du pool (window.CB_POOL) en crossfade.
+     Repli no-JS / reduced-motion = la 1re image (de repli) reste affichée. */
+  function initSlideshow(){
+    var pool=(window.CB_POOL||[]);
+    var boxes=document.querySelectorAll('[data-cb-slideshow]'); if(!boxes.length||!pool.length) return;
+    if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: no-preference)').matches)) return;
+    boxes.forEach(function(box,bi){
+      var stage=box.querySelector('.cb-slideshow__stage'); if(!stage) return;
+      var first=stage.querySelector('.cb-slide'); if(!first) return;
+      var order=pool.slice();
+      for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;}
+      var layerB=document.createElement('img');
+      layerB.className='cb-slide'; layerB.alt=''; layerB.decoding='async'; layerB.loading='lazy';
+      stage.appendChild(layerB);
+      var cur=first, nxt=layerB, idx=0, visible=true;
+      function swap(){ nxt.classList.add('cb-slide--on'); cur.classList.remove('cb-slide--on'); var t=cur;cur=nxt;nxt=t; }
+      function step(){ idx=(idx+1)%order.length; nxt.onload=swap; nxt.onerror=function(){}; nxt.src=order[idx]; if(nxt.complete&&nxt.naturalWidth) swap(); }
+      setInterval(function(){ if(visible) step(); }, 4800+bi*900);
+      if('IntersectionObserver' in window){
+        new IntersectionObserver(function(es){ visible=es[0].isIntersecting; },{threshold:0.01}).observe(box);
+      }
     });
   }
 

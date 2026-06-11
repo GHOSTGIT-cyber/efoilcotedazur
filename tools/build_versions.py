@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Génère les éditions de la landing eFoil COMO Le Beauvallon depuis le template
-(como-beauvallon-efoil.html), en remplaçant chaque slot MEDIA_* par la vraie
-photo/vidéo (medias/web/). Lance d'abord tools/optimize_media.py.
+Génère les éditions de la landing eFoil COMO Le Beauvallon depuis le template,
+en câblant les slots MEDIA_*, en injectant le POOL (galerie auto) et en
+réordonnant les blocs pour V3.
 
-Sortie : como-beauvallon-v1-coucher-de-soleil / v2-le-domaine / v3-escapade .html
-Slot CARTE = laissé en placeholder (iframe Google Maps).
+Usage : python tools/build_versions.py   (après tools/optimize_media.py)
 """
-import re, os
+import re, os, glob, json
 from PIL import Image
 
 BASE = 'como-beauvallon-efoil.html'
@@ -19,15 +18,18 @@ def dims(name):
 def esc(s): return s.replace('"', '&quot;')
 
 def img_fill(name, alt, lazy=True):
-    w, h = dims(name)
-    l = ' loading="lazy" decoding="async"' if lazy else ' fetchpriority="high" decoding="async"'
+    w,h=dims(name); l=' loading="lazy" decoding="async"' if lazy else ' fetchpriority="high" decoding="async"'
     return f'<img class="cb-fill" src="medias/web/{name}.webp" width="{w}" height="{h}"{l} alt="{esc(alt)}">'
 def img_media(name, ratio, alt):
-    w, h = dims(name)
+    w,h=dims(name)
     return (f'<img class="cb-media cb-ratio-{ratio}" src="medias/web/{name}.webp" '
             f'width="{w}" height="{h}" loading="lazy" decoding="async" alt="{esc(alt)}">')
+def slide_fallback(name, alt):
+    w,h=dims(name)
+    return (f'<img class="cb-fill cb-slide cb-slide--on" src="medias/web/{name}.webp" '
+            f'width="{w}" height="{h}" loading="lazy" decoding="async" alt="{esc(alt)}">')
 def video_fill(alt):
-    w, h = dims('hero-video-poster')
+    w,h=dims('hero-video-poster')
     return (f'<video class="cb-fill" muted loop playsinline preload="metadata" '
             f'poster="medias/web/hero-video-poster.webp" width="{w}" height="{h}" data-cb-autoplay '
             f'aria-label="{esc(alt)}"><source src="medias/web/hero-video.mp4" type="video/mp4"></video>')
@@ -39,19 +41,50 @@ def replace_slot(html, tag, markup):
     assert n == 1, f"slot {tag}: {n} remplacement(s)"
     return html
 
+# ---- réordonnancement des blocs (sections délimitées par les commentaires ══ LABEL ══) ----
+def _keyof(label):
+    L=label.upper()
+    if 'AUTO #1' in L: return 'slide1'
+    if 'AUTO #2' in L: return 'slide2'
+    if 'HERO' in L: return 'hero'
+    if 'LIEU' in L: return 'lieu'
+    if 'EXP' in L: return 'exp'
+    if 'POUR QUI' in L: return 'pourqui'
+    if 'SPOT' in L: return 'spot'
+    if 'GALERIE' in L: return 'gallery'
+    if 'DÉROUL' in L or 'DEROUL' in L: return 'deroule'
+    if 'BEACH' in L: return 'beach'
+    if 'PREUVE' in L: return 'proof'
+    if 'RÉSERV' in L or 'RESERV' in L: return 'reserver'
+    if 'FAQ' in L: return 'faq'
+    if 'FOOTER' in L: return 'footer'
+    return 'unknown'
+
+def reorder(html, order):
+    marks=[(m.start(), m.group(1).strip()) for m in re.finditer(r'<!-- ═{6,} (.+?) ═{6,}', html)]
+    if not marks: return html
+    keys=[_keyof(l) for _,l in marks]
+    starts=[s for s,_ in marks]+[len(html)]
+    chunks={keys[i]: html[starts[i]:starts[i+1]] for i in range(len(marks))}
+    pos={keys[i]:i for i in range(len(marks))}
+    if 'lieu' not in pos or 'footer' not in pos: return html
+    il, ifoot = pos['lieu'], pos['footer']
+    middle=[keys[i] for i in range(il, ifoot)]
+    if set(order)!=set(middle):
+        print("   ! reorder ignoré (clés:", set(middle)^set(order), ")"); return html
+    return html[:starts[il]] + ''.join(chunks[k] for k in order) + html[starts[ifoot]:]
+
 ALT = {
- 'hero-sunset':"Au coucher du soleil, des riders en eFoil glissent devant la silhouette de Saint-Tropez.",
  'hero-grandevue':"Vue aérienne du domaine COMO Le Beauvallon : le palace Belle Époque, la pinède, la plage et le ponton sur le golfe.",
- 'hero-formation':"Riders en formation volant sur leurs eFoils au-dessus du golfe de Saint-Tropez.",
+ 'hero-chateau':"Le palace Belle Époque du domaine COMO Le Beauvallon dans la pinède, au coucher du soleil, au-dessus du golfe.",
  'lieu-chateau':"Le palace Belle Époque du domaine COMO Le Beauvallon, dans les pins, au coucher du soleil.",
- 'beach-parasols':"Le beach club du domaine : parasols dorés et vue sur le golfe de Saint-Tropez.",
- 'beach-loungers':"Transats et parasols du beach club face à la mer.",
+ 'beach-aerial':"Vue aérienne du beach club du domaine : sable, parasols dorés et eau turquoise.",
+ 'beach-parasols':"Les parasols dorés du beach club face au golfe.",
  'exp-silence':"Des riders glissent en silence sur le golfe au coucher du soleil.",
  'exp-apesanteur':"Deux riders portés par leur aile au-dessus du golfe, devant le domaine.",
  'exp-rythme':"Un moniteur accompagne un débutant lors de ses premiers vols.",
  'breath-sunset':"Vue drone : des riders en eFoil sur le golfe au coucher du soleil.",
- 'breath-redrock':"Riders en vol devant les roches rouges de l'Estérel.",
- 'breath-golfe':"Riders en vol sur l'eau calme du golfe.",
+ 'breath-golfe':"Riders en vol au-dessus du golfe.",
  'ride-women':"Deux rideuses en eFoil sur l'eau calme, reflets du matin.",
  'ride-redrock':"Trois riders en vol devant les roches rouges.",
  'ride-lerins-orange':"Rider sur une planche Lift orange devant le fort de Sainte-Marguerite.",
@@ -65,48 +98,53 @@ ALT = {
  'session-water':"Premiers mètres à l'eau, accompagné d'un moniteur.",
  'session-flight':"Le vol : la planche s'élève au-dessus du golfe.",
 }
-A = lambda n: ALT[n]
-VIDEO_ALT = "Vue drone au coucher du soleil : des riders en eFoil glissent sur le golfe de Saint-Tropez."
+A=lambda n:ALT[n]
+VIDEO_ALT="Vue drone au coucher du soleil : des riders en eFoil glissent sur le golfe de Saint-Tropez."
 
-COMMON = [
+COMMON=[
  ('MEDIA_LIEU',     lambda: img_media('lieu-chateau','43',A('lieu-chateau'))),
- ('MEDIA_BEACH_1',  lambda: img_media('beach-parasols','169',A('beach-parasols'))),
- ('MEDIA_BEACH_2',  lambda: img_media('beach-loungers','34',A('beach-loungers'))),
+ ('MEDIA_BEACH_1',  lambda: img_media('beach-aerial','169',A('beach-aerial'))),
+ ('MEDIA_BEACH_2',  lambda: img_media('beach-parasols','43',A('beach-parasols'))),
  ('MEDIA_EXP_1',    lambda: img_media('exp-silence','169',A('exp-silence'))),
  ('MEDIA_EXP_2',    lambda: img_media('exp-apesanteur','43',A('exp-apesanteur'))),
  ('MEDIA_EXP_3',    lambda: img_media('exp-rythme','34',A('exp-rythme'))),
+ ('MEDIA_SLIDE_1',  lambda: slide_fallback('breath-sunset',A('breath-sunset'))),
+ ('MEDIA_SLIDE_2',  lambda: slide_fallback('breath-golfe',A('breath-golfe'))),
  ('MEDIA_SESSION_1',lambda: img_media('session-briefing','169',A('session-briefing'))),
  ('MEDIA_SESSION_2',lambda: img_media('session-gear','169',A('session-gear'))),
  ('MEDIA_SESSION_3',lambda: img_media('session-water','169',A('session-water'))),
  ('MEDIA_SESSION_4',lambda: img_media('session-flight','169',A('session-flight'))),
 ]
-GALLERY = ['ride-women','ride-redrock','ride-lerins-orange','ride-formation',
-           'ride-esterel','ride-yacht','ride-esterel-vert','ride-lerins-green']
-GAL_RATIOS = ['34','43','34','43','34','34','34','34']
+GALLERY=['ride-women','ride-redrock','ride-lerins-orange','ride-formation',
+         'ride-esterel','ride-yacht','ride-esterel-vert','ride-lerins-green']
+GAL_RATIOS=['34','43','34','43','34','34','34','34']
 
-EDITIONS = {
- 'v1-coucher-de-soleil': dict(label="Coucher de soleil",
-    hero=('video',None), broll1='breath-redrock', broll2='breath-golfe'),
- 'v2-le-domaine': dict(label="Le domaine",
-    hero=('img','hero-grandevue'), broll1='breath-sunset', broll2='breath-redrock'),
- 'v3-escapade': dict(label="Escapade",
-    hero=('img','hero-formation'), broll1='breath-redrock', broll2='breath-sunset'),
+V3_ORDER=['exp','slide1','lieu','gallery','spot','deroule','beach','slide2','pourqui','proof','reserver','faq']
+
+EDITIONS={
+ 'v1-coucher-de-soleil': dict(label="Coucher de soleil", hero=('video',None), order=None),
+ 'v2-le-domaine':        dict(label="Le domaine",        hero=('img','hero-grandevue'), order=None),
+ 'v3-escapade':          dict(label="Escapade",          hero=('img','hero-chateau'),  order=V3_ORDER),
 }
 
-if __name__ == '__main__':
-    for key, cfg in EDITIONS.items():
-        h = base.replace(
-            '<title>eFoil au golfe de Saint-Tropez — sessions au départ du domaine COMO Le Beauvallon</title>',
-            f'<title>eFoil · COMO Le Beauvallon — golfe de Saint-Tropez · Édition {cfg["label"]}</title>')
-        h = h.replace('cb-lieu__fig cb-parallax','cb-lieu__fig').replace('cb-beach__fig cb-parallax cb-fade','cb-beach__fig cb-fade')
-        kind, name = cfg['hero']
-        h = replace_slot(h,'MEDIA_HERO_VIDEO', video_fill(VIDEO_ALT) if kind=='video' else img_fill(name,A(name),lazy=False))
-        h = replace_slot(h,'MEDIA_BROLL_1', img_fill(cfg['broll1'],A(cfg['broll1'])))
-        h = replace_slot(h,'MEDIA_BROLL_2', img_fill(cfg['broll2'],A(cfg['broll2'])))
-        for tag, fn in COMMON: h = replace_slot(h, tag, fn())
+# pool (galerie auto)
+pool=sorted(p.replace('\\','/') for p in glob.glob('medias/web/pool/*.webp'))
+POOL_SCRIPT='<script>window.CB_POOL='+json.dumps(pool, ensure_ascii=False)+';</script>\n'
+
+if __name__=='__main__':
+    for key,cfg in EDITIONS.items():
+        h=base
+        if cfg['order']: h=reorder(h, cfg['order'])
+        h=h.replace('<title>eFoil au golfe de Saint-Tropez — sessions au départ du domaine COMO Le Beauvallon</title>',
+                    f'<title>eFoil · COMO Le Beauvallon — golfe de Saint-Tropez · Édition {cfg["label"]}</title>')
+        h=h.replace('cb-lieu__fig cb-parallax','cb-lieu__fig').replace('cb-beach__fig cb-parallax cb-fade','cb-beach__fig cb-fade')
+        kind,name=cfg['hero']
+        h=replace_slot(h,'MEDIA_HERO_VIDEO', video_fill(VIDEO_ALT) if kind=='video' else img_fill(name,A(name),lazy=False))
+        for tag,fn in COMMON: h=replace_slot(h,tag,fn())
         for i,(nm,rt) in enumerate(zip(GALLERY,GAL_RATIOS),1):
-            h = replace_slot(h, f'MEDIA_RIDE_{i}', img_media(nm,rt,A(nm)))
-        out = f'como-beauvallon-{key}.html'
-        open(out,'w',encoding='utf-8').write(h)
-        left = len(re.findall(r'cb-ph__tag">MEDIA_', h))
-        print(f"  -> {out}   (placeholders MEDIA restants: {left})")
+            h=replace_slot(h,f'MEDIA_RIDE_{i}', img_media(nm,rt,A(nm)))
+        # injecte le pool juste avant les scripts GSAP
+        h=h.replace('<!-- ══ GSAP + ScrollTrigger', POOL_SCRIPT+'<!-- ══ GSAP + ScrollTrigger', 1)
+        out=f'como-beauvallon-{key}.html'; open(out,'w',encoding='utf-8').write(h)
+        left=len(re.findall(r'cb-ph__tag">MEDIA_', h))
+        print(f"  -> {out}   pool:{len(pool)}  placeholders MEDIA restants:{left}")
