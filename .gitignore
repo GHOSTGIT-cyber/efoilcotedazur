@@ -11,7 +11,6 @@ medias/reel/
 medias/como-web/
 medias/video-frames/
 medias/_contact-sheet.jpg
-assets/video/
 
 # Garde les previews Como Beauvallon (HTML léger, pas de binaires)
 # medias/como-beauvallon/ → inclus intentionnellement
