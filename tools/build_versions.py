@@ -98,7 +98,7 @@ ALT = {
  'session-water':"Premiers mètres à l'eau, accompagné d'un moniteur.",
  'session-flight':"Le vol : la planche s'élève au-dessus du golfe.",
 }
-A=lambda n:ALT[n]
+A=lambda n: ALT.get(n, "Vue aérienne par drone : le golfe de Saint-Tropez, la côte et les riders en eFoil.")
 VIDEO_ALT="Vue drone au coucher du soleil : des riders en eFoil glissent sur le golfe de Saint-Tropez."
 
 COMMON=[
@@ -119,32 +119,53 @@ GALLERY=['ride-women','ride-redrock','ride-lerins-orange','ride-formation',
          'ride-esterel','ride-yacht','ride-esterel-vert','ride-lerins-green']
 GAL_RATIOS=['34','43','34','43','34','34','34','34']
 
+# ---- Édition FULL DRONE : slots aériens distincts (drone-*) + pool aérien ----
+DRONE_COMMON=[
+ ('MEDIA_LIEU',     lambda: img_media('drone-lieu','43',A('drone-lieu'))),
+ ('MEDIA_BEACH_1',  lambda: img_media('beach-aerial','169',A('beach-aerial'))),   # beach club COMO vu du ciel
+ ('MEDIA_BEACH_2',  lambda: img_media('drone-beach2','43',A('drone-beach2'))),
+ ('MEDIA_EXP_1',    lambda: img_media('drone-exp1','169',A('drone-exp1'))),
+ ('MEDIA_EXP_2',    lambda: img_media('drone-exp2','43',A('drone-exp2'))),
+ ('MEDIA_EXP_3',    lambda: img_media('drone-exp3','34',A('drone-exp3'))),
+ ('MEDIA_SLIDE_1',  lambda: slide_fallback('drone-slide1',A('drone-slide1'))),
+ ('MEDIA_SLIDE_2',  lambda: slide_fallback('drone-slide2',A('drone-slide2'))),
+ ('MEDIA_SESSION_1',lambda: img_media('drone-session-1','169',A('drone-session-1'))),
+ ('MEDIA_SESSION_2',lambda: img_media('drone-session-2','169',A('drone-session-2'))),
+ ('MEDIA_SESSION_3',lambda: img_media('drone-session-3','169',A('drone-session-3'))),
+ ('MEDIA_SESSION_4',lambda: img_media('drone-session-4','169',A('drone-session-4'))),
+]
+GALLERY_DRONE=['drone-ride-1','drone-ride-2','drone-ride-3','drone-ride-4',
+               'drone-ride-5','drone-ride-6','drone-ride-7','drone-ride-8']
+
 V3_ORDER=['exp','slide1','lieu','gallery','spot','deroule','beach','slide2','pourqui','proof','reserver','faq']
 
 EDITIONS={
- 'v1-coucher-de-soleil': dict(label="Coucher de soleil", hero=('video',None), order=None),
- 'v2-le-domaine':        dict(label="Le domaine",        hero=('img','hero-grandevue'), order=None),
- 'v3-escapade':          dict(label="Escapade",          hero=('img','hero-chateau'),  order=V3_ORDER),
+ 'v1-coucher-de-soleil': dict(label="Coucher de soleil", hero=('video',None)),
+ 'v2-le-domaine':        dict(label="Le domaine",        hero=('img','hero-grandevue')),
+ 'v3-escapade':          dict(label="Escapade",          hero=('img','hero-chateau'), order=V3_ORDER),
+ 'v4-full-drone':        dict(label="Full drone",        hero=('video',None),
+                              media=DRONE_COMMON, gallery=GALLERY_DRONE, pooldir='pool-drone'),
 }
 
-# pool (galerie auto)
-pool=sorted(p.replace('\\','/') for p in glob.glob('medias/web/pool/*.webp'))
-POOL_SCRIPT='<script>window.CB_POOL='+json.dumps(pool, ensure_ascii=False)+';</script>\n'
+def pool_script(dirn):
+    pl=sorted(p.replace('\\','/') for p in glob.glob(f'medias/web/{dirn}/*.webp'))
+    return '<script>window.CB_POOL='+json.dumps(pl, ensure_ascii=False)+';</script>\n', len(pl)
 
 if __name__=='__main__':
     for key,cfg in EDITIONS.items():
+        media=cfg.get('media',COMMON); gallery=cfg.get('gallery',GALLERY); pooldir=cfg.get('pooldir','pool')
         h=base
-        if cfg['order']: h=reorder(h, cfg['order'])
+        if cfg.get('order'): h=reorder(h, cfg['order'])
         h=h.replace('<title>eFoil au golfe de Saint-Tropez — sessions au départ du domaine COMO Le Beauvallon</title>',
                     f'<title>eFoil · COMO Le Beauvallon — golfe de Saint-Tropez · Édition {cfg["label"]}</title>')
         h=h.replace('cb-lieu__fig cb-parallax','cb-lieu__fig').replace('cb-beach__fig cb-parallax cb-fade','cb-beach__fig cb-fade')
         kind,name=cfg['hero']
         h=replace_slot(h,'MEDIA_HERO_VIDEO', video_fill(VIDEO_ALT) if kind=='video' else img_fill(name,A(name),lazy=False))
-        for tag,fn in COMMON: h=replace_slot(h,tag,fn())
-        for i,(nm,rt) in enumerate(zip(GALLERY,GAL_RATIOS),1):
+        for tag,fn in media: h=replace_slot(h,tag,fn())
+        for i,(nm,rt) in enumerate(zip(gallery,GAL_RATIOS),1):
             h=replace_slot(h,f'MEDIA_RIDE_{i}', img_media(nm,rt,A(nm)))
-        # injecte le pool juste avant les scripts GSAP
-        h=h.replace('<!-- ══ GSAP + ScrollTrigger', POOL_SCRIPT+'<!-- ══ GSAP + ScrollTrigger', 1)
+        ps,npool=pool_script(pooldir)
+        h=h.replace('<!-- ══ GSAP + ScrollTrigger', ps+'<!-- ══ GSAP + ScrollTrigger', 1)
         out=f'como-beauvallon-{key}.html'; open(out,'w',encoding='utf-8').write(h)
         left=len(re.findall(r'cb-ph__tag">MEDIA_', h))
-        print(f"  -> {out}   pool:{len(pool)}  placeholders MEDIA restants:{left}")
+        print(f"  -> {out}   pool:{npool}  MEDIA restants:{left}")

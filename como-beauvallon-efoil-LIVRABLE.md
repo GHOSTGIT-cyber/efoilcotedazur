@@ -25,6 +25,7 @@ les woff2 ne sont pas déposés).
 | `como-beauvallon-v1-coucher-de-soleil.html` | **Vidéo drone au coucher du soleil** (boucle compressée 11,7 Mo + poster) — riders sur le golfe | la plus spectaculaire |
 | `como-beauvallon-v2-le-domaine.html` | **Grande vue aérienne COMO** (le château Belle Époque + ponton + golfe) | patrimoniale |
 | `como-beauvallon-v3-escapade.html` | **Le château** (palace Belle Époque, golden hour) + **ordre des blocs revu** | dynamique / scénique |
+| `como-beauvallon-v4-full-drone.html` | **100 % aérien** : héros vidéo drone + **toutes** les images = plans drone DISTINCTS (24 frames dédupliquées de `CotedeZur_Awaking.mov`) + pool galerie aérien | film de drone |
 
 **Communes aux 3** : Lieu = **château COMO** · Beach club = **vue aérienne + parasols COMO** (déplacé **juste avant les avis**) · Expérience = 3 images, défilement normal (**aucun scroll bloquant**) · **2 galeries AUTO** (slides aléatoires en crossfade, pool de **116 images** — riders + vues aériennes des vidéos) à la place des anciens bandeaux photo · Galerie horizontale draggable = 8 plans · Déroulé = briefing → équipement → à l'eau → vol. Grade chaud subtil sur les plans plein-jour, voiles dé-orangés.
 
