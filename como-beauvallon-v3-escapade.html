@@ -114,6 +114,7 @@ html,body{margin:0}
   --cb-coral:#cf5836;        /* = terracotta (réaffecté) */
   --cb-lift:#cf5836;         /* réaffecté terracotta : signature/accents (plus de turquoise dans le chrome) */
   --cb-lift-deep:#b1431f;    /* terracotta foncé — liens AA (≥4.5:1) sur crème et sable */
+  --cb-warm:saturate(1.16) sepia(.18) brightness(1.02);  /* teinte chaude COMO sur les photos — règle d'un seul cran (sepia .10 = doux, .25 = plus orangé) */
   --cb-grain-url:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='170'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 
   --cb-line:rgba(43,36,25,.14);
@@ -352,6 +353,7 @@ html,body{margin:0}
   letter-spacing:.06em;font-size:1.18rem;color:var(--cb-teal-900)}
 .cb-who__item p{margin-top:.9rem;color:var(--cb-teal-700);max-width:42ch}
 .cb-who__item .cb-num{color:var(--cb-teal-600);font-size:.9rem;letter-spacing:.2em}
+.cb-who__media{overflow:hidden;margin-bottom:1.3rem}
 
 /* ── Section SPOT (carte + NAP) ───────────────────────────────────────────── */
 .cb-spot{display:grid;grid-template-columns:1fr;gap:clamp(36px,5vw,64px);align-items:center}
@@ -376,9 +378,9 @@ html,body{margin:0}
 .cb-rail.cb-grab{cursor:grabbing;scroll-snap-type:none}
 .cb-rail::-webkit-scrollbar{height:3px}
 .cb-rail::-webkit-scrollbar-thumb{background:rgba(43,36,25,.28)}
-.cb-card{flex:0 0 78%;scroll-snap-align:start}
-@media(min-width:680px){.cb-card{flex-basis:46%}}
-@media(min-width:1024px){.cb-card{flex-basis:30%}}
+.cb-card{flex:0 0 72%;scroll-snap-align:start}
+@media(min-width:680px){.cb-card{flex-basis:38%}}
+@media(min-width:1024px){.cb-card{flex-basis:23%}}
 .cb-card .cb-ph{height:100%}
 .cb-card--tall{align-self:stretch}
 .cb-card figcaption{margin-top:.8rem;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cb-teal-600);font-family:var(--cb-ff-display)}
@@ -508,6 +510,8 @@ html,body{margin:0}
 /* Médias réels (éditions photo/vidéo) : remplissage + ratios */
 .cb-media{display:block;width:100%;height:auto;object-fit:cover;background:var(--cb-sand)}
 .cb-fill{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:var(--cb-sand)}
+/* Teinte chaude COMO cohérente sur TOUTES les photos (héros, slots, mosaïque) */
+.cb-media,.cb-fill,.cb-mosaic__fallback,.cb-mtile img{filter:var(--cb-warm)}
 .cb-hero__media img,.cb-hero__media video,.cb-breath__media img,.cb-breath__media video,.cb-pin__bg img,.cb-pin__bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 
 /* ── prefers-reduced-motion : tout contenu visible, animations coupées ────── */
@@ -678,6 +682,12 @@ html,body{margin:0}
       <figure class="cb-card"><img class="cb-media cb-ratio-34" src="medias/web/ride-yacht.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Riders en eFoil devant le port et ses yachts."><figcaption>Les yachts</figcaption></figure>
       <figure class="cb-card"><img class="cb-media cb-ratio-34" src="medias/web/ride-esterel-vert.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Riders au pied des roches rouges de l'Estérel."><figcaption>La calanque</figcaption></figure>
       <figure class="cb-card"><img class="cb-media cb-ratio-34" src="medias/web/ride-lerins-green.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Rideuse souriante en vol sur une planche Lift verte."><figcaption>Le sourire</figcaption></figure>
+      <figure class="cb-card"><img class="cb-media cb-ratio-43" src="medias/web/ride-9.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Riders sur le golfe."><figcaption>Le golfe</figcaption></figure>
+      <figure class="cb-card"><img class="cb-media cb-ratio-34" src="medias/web/ride-10.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Rider en vol."><figcaption>Le matin</figcaption></figure>
+      <figure class="cb-card"><img class="cb-media cb-ratio-43" src="medias/web/ride-11.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Riders et yachts au mouillage."><figcaption>Au mouillage</figcaption></figure>
+      <figure class="cb-card"><img class="cb-media cb-ratio-34" src="medias/web/ride-12.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Rider sur l'eau calme."><figcaption>La glisse</figcaption></figure>
+      <figure class="cb-card"><img class="cb-media cb-ratio-43" src="medias/web/ride-13.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Roche rouge de l'Estérel."><figcaption>L'Estérel</figcaption></figure>
+      <figure class="cb-card"><img class="cb-media cb-ratio-34" src="medias/web/ride-14.webp" width="1000" height="1333" loading="lazy" decoding="async" alt="Rider à la golden hour."><figcaption>La lumière</figcaption></figure>
     </div>
   </section>
 
@@ -771,21 +781,25 @@ html,body{margin:0}
       </h2>
       <div class="cb-who__grid">
         <div class="cb-who__item cb-fade">
+          <figure class="cb-who__media"><img class="cb-media cb-ratio-43" src="medias/web/who-1.webp" width="1100" height="825" loading="lazy" decoding="async" alt="Débutant accompagné par un moniteur lors de ses premiers vols."></figure>
           <span class="cb-num">01</span>
           <h3>Débutant accompagné</h3>
           <p>Aucune expérience requise. Un moniteur, un briefing, et des eaux abritées idéales pour apprendre. La plupart des riders volent leurs premiers mètres en vingt à soixante minutes.</p>
         </div>
         <div class="cb-who__item cb-fade">
+          <figure class="cb-who__media"><img class="cb-media cb-ratio-43" src="medias/web/who-2.webp" width="1100" height="825" loading="lazy" decoding="async" alt="Rider confirmé en session libre sur le golfe."></figure>
           <span class="cb-num">02</span>
           <h3>Rider confirmé</h3>
           <p>Vous connaissez le foil ? Partez en session libre sur le golfe, le temps d'une batterie. Le plan d'eau abrité laisse de l'espace pour la vitesse et les longues lignes.</p>
         </div>
         <div class="cb-who__item cb-fade">
+          <figure class="cb-who__media"><img class="cb-media cb-ratio-43" src="medias/web/who-3.webp" width="1100" height="825" loading="lazy" decoding="async" alt="Encadrement et sécurité : briefing et matériel."></figure>
           <span class="cb-num">03</span>
           <h3>Encadrement &amp; sécurité</h3>
           <p>Gilet, télécommande à coupure automatique, hélice protégée, briefing complet. Un moniteur reste à proximité. La progressivité prime sur la performance.</p>
         </div>
         <div class="cb-who__item cb-fade">
+          <figure class="cb-who__media"><img class="cb-media cb-ratio-43" src="medias/web/who-4.webp" width="1100" height="825" loading="lazy" decoding="async" alt="Matériel Lift : foils électriques en carbone."></figure>
           <span class="cb-num">04</span>
           <h3><span class="cb-glint-dot" aria-hidden="true"></span>Matériel Lift</h3>
           <p>Des foils électriques <strong>Lift</strong>, marque pionnière de l'eFoil, en carbone. Conçus pour une glisse douce et un apprentissage accessible. <!-- {{MODELE_LIFT}} : préciser Lift4 / Lift5 selon la flotte réelle --></p>

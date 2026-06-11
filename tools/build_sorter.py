@@ -70,12 +70,14 @@ footer{position:sticky;bottom:0;background:rgba(21,19,15,.97);border-top:1px sol
 <footer id="foot"></footer>
 <script>
 var PHOTOS = /*__MANIFEST__*/;
-var DEFCATS=[{id:'top',name:'Pepite',c:'#f4c542'},{id:'aerien',name:'Vue aerienne',c:'#39c0c8'},
- {id:'sunset',name:'Coucher de soleil',c:'#f0823c'},{id:'rider',name:'Rider / sur planche',c:'#5fbf6a'},
- {id:'beach',name:'Beach club / parasols',c:'#e8c33e'},{id:'lieu',name:'Lieu / chateau',c:'#46a6b8'},
- {id:'yacht',name:'Yachts / port',c:'#5a8fd6'},{id:'rock',name:'Roche rouge',c:'#d4603f'},
- {id:'detail',name:'Detail / materiel',c:'#a784d8'},{id:'proscrire',name:'A proscrire',c:'#8a8a8a'}];
-var LS='efcaTri_';
+/* Catégories = SECTIONS de la page (chaque photo va dans son "dossier" / sa section) */
+var DEFCATS=[{id:'hero',name:'Heros',c:'#f4c542'},{id:'lieu',name:'Le lieu / chateau',c:'#46a6b8'},
+ {id:'beach',name:'Beach club',c:'#e8c33e'},{id:'exp',name:'Experience',c:'#5fbf6a'},
+ {id:'deroule',name:'Deroule / pedagogue',c:'#5a8fd6'},{id:'galerie',name:'Galerie',c:'#d4603f'},
+ {id:'whoq',name:'Pour qui',c:'#c98a3a'},{id:'spot',name:'Le spot (aerien)',c:'#39c0c8'},
+ {id:'mosaic',name:'Mosaique (fond)',c:'#a784d8'},{id:'top',name:'Pepite',c:'#f0823c'},
+ {id:'proscrire',name:'A proscrire',c:'#8a8a8a'}];
+var LS='efcaTri2_';
 function load(k,d){try{var v=JSON.parse(localStorage.getItem(LS+k));return v==null?d:v}catch(e){return d}}
 function persist(){localStorage.setItem(LS+'assign',JSON.stringify(assign));localStorage.setItem(LS+'cats',JSON.stringify(cats));}
 var cats=load('cats',DEFCATS.slice()),assign=load('assign',{}),brush=cats[0].id,filter='all';

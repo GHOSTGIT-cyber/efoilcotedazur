@@ -81,6 +81,12 @@ ALT = {
  'beach-aerial':"Vue aérienne du beach club du domaine : sable, parasols dorés et eau turquoise.",
  'beach-parasols':"Les parasols dorés du beach club face au golfe.",
  'spot-aerial':"Vue aérienne du domaine COMO Le Beauvallon : l'hôtel Belle Époque, la plage et le golfe de Saint-Tropez.",
+ 'who-1':"Débutant accompagné par un moniteur lors de ses premiers vols.","drone-who-1":"Vue aérienne : un rider accompagné sur le golfe.",
+ 'who-2':"Rider confirmé en session libre sur le golfe.","drone-who-2":"Vue aérienne : rider en session libre.",
+ 'who-3':"Encadrement et sécurité : briefing et matériel.","drone-who-3":"Vue aérienne du plan d'eau et des riders.",
+ 'who-4':"Matériel Lift : foils électriques en carbone.","drone-who-4":"Vue aérienne : détail d'un rider en vol.",
+ 'ride-9':"Riders sur le golfe.",'ride-10':"Rider en vol.",'ride-11':"Riders et yachts au mouillage.",
+ 'ride-12':"Rider sur l'eau calme.",'ride-13':"Roche rouge de l'Estérel.",'ride-14':"Rider à la golden hour.",
  'exp-silence':"Des riders glissent en silence sur le golfe au coucher du soleil.",
  'exp-apesanteur':"Deux riders portés par leur aile au-dessus du golfe, devant le domaine.",
  'exp-rythme':"Un moniteur accompagne un débutant lors de ses premiers vols.",
@@ -116,10 +122,15 @@ COMMON=[
  ('MEDIA_SESSION_3',lambda: img_media('session-water','169',A('session-water'))),
  ('MEDIA_SESSION_4',lambda: img_media('session-flight','169',A('session-flight'))),
  ('MEDIA_SPOT',     lambda: img_media('spot-aerial','43',A('spot-aerial'))),
+ ('MEDIA_WHO_1',    lambda: img_media('who-1','43',A('who-1'))),
+ ('MEDIA_WHO_2',    lambda: img_media('who-2','43',A('who-2'))),
+ ('MEDIA_WHO_3',    lambda: img_media('who-3','43',A('who-3'))),
+ ('MEDIA_WHO_4',    lambda: img_media('who-4','43',A('who-4'))),
 ]
 GALLERY=['ride-women','ride-redrock','ride-lerins-orange','ride-formation',
-         'ride-esterel','ride-yacht','ride-esterel-vert','ride-lerins-green']
-GAL_RATIOS=['34','43','34','43','34','34','34','34']
+         'ride-esterel','ride-yacht','ride-esterel-vert','ride-lerins-green',
+         'ride-9','ride-10','ride-11','ride-12','ride-13','ride-14']
+GAL_RATIOS=['34','43','34','43','34','34','34','34','43','34','43','34','43','34']
 
 # ---- Édition FULL DRONE : slots aériens distincts (drone-*) + pool aérien ----
 DRONE_COMMON=[
@@ -136,9 +147,14 @@ DRONE_COMMON=[
  ('MEDIA_SESSION_3',lambda: img_media('drone-session-3','169',A('drone-session-3'))),
  ('MEDIA_SESSION_4',lambda: img_media('drone-session-4','169',A('drone-session-4'))),
  ('MEDIA_SPOT',     lambda: img_media('spot-aerial','43',A('spot-aerial'))),
+ ('MEDIA_WHO_1',    lambda: img_media('drone-who-1','43',A('drone-who-1'))),
+ ('MEDIA_WHO_2',    lambda: img_media('drone-who-2','43',A('drone-who-2'))),
+ ('MEDIA_WHO_3',    lambda: img_media('drone-who-3','43',A('drone-who-3'))),
+ ('MEDIA_WHO_4',    lambda: img_media('drone-who-4','43',A('drone-who-4'))),
 ]
 GALLERY_DRONE=['drone-ride-1','drone-ride-2','drone-ride-3','drone-ride-4',
-               'drone-ride-5','drone-ride-6','drone-ride-7','drone-ride-8']
+               'drone-ride-5','drone-ride-6','drone-ride-7','drone-ride-8',
+               'drone-ride-9','drone-ride-10','drone-ride-11','drone-ride-12','drone-ride-13','drone-ride-14']
 
 V3_ORDER=['exp','slide1','lieu','gallery','deroule','beach','slide2','pourqui','proof','reserver','faq','spot']
 

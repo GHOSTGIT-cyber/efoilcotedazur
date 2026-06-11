@@ -86,6 +86,16 @@ SLOTS={
  'ride-yacht':('medias/cannes/Cannes_Cote-45.jpg',(3,4),1000,.5,.5),
  'ride-esterel-vert':('medias/cannes/Cannes_Cote-96.jpg',(3,4),1000,.45,.5),
  'ride-lerins-green':('medias/iles-lerins/Post_4x5-25_Secondd.jpg',(3,4),1000,.42,.5),
+ 'ride-9':('medias/cannes/Cannes_Cote-90.jpg',(4,3),1280,.5,.5),
+ 'ride-10':('medias/cannes/Cannes_Cote-135.jpg',(3,4),1000,.42,.5),
+ 'ride-11':('medias/cannes/Cannes_Cote-180.jpg',(4,3),1280,.5,.5),
+ 'ride-12':('medias/cannes/Cannes_Cote-109.jpg',(3,4),1000,.42,.5),
+ 'ride-13':('medias/cannes/Cannes_Cote-73.jpg',(4,3),1280,.5,.5),
+ 'ride-14':('medias/cannes/Cannes_Cote-153.jpg',(3,4),1000,.42,.5),
+ 'who-1':('medias/cannes/Cannes_Cote-161.jpg',(4,3),1100,.45,.5),
+ 'who-2':('medias/cannes/Cannes_Cote-194.jpg',(4,3),1100,.5,.5),
+ 'who-3':(BV+'19a1d93b-24c7-4ce7-8e34-fc634e6ce764.JPG',(4,3),1100,.4,.5),
+ 'who-4':('medias/video-frames/drone/aw-034.6.jpg',(4,3),1100,.5,.5),
 }
 for name,(src,r,w,vf,hf) in SLOTS.items(): slot(src,r,w,name,vf,hf)
 print("SLOTS photo:",len(SLOTS))
@@ -97,9 +107,12 @@ land=land or aerial; port=port or aerial
 DR_LAND=[('drone-lieu',(4,3),1280),('drone-exp1',(16,9),1280),('drone-exp2',(4,3),1280),
  ('drone-slide1',(16,9),1280),('drone-slide2',(16,9),1280),('drone-beach2',(4,3),1100),
  ('drone-session-1',(16,9),1280),('drone-session-2',(16,9),1280),('drone-session-3',(16,9),1280),
- ('drone-session-4',(16,9),1280),('drone-ride-2',(4,3),1280),('drone-ride-4',(4,3),1280)]
+ ('drone-session-4',(16,9),1280),('drone-ride-2',(4,3),1280),('drone-ride-4',(4,3),1280),
+ ('drone-ride-9',(4,3),1280),('drone-ride-11',(4,3),1280),('drone-ride-13',(4,3),1280),
+ ('drone-who-1',(4,3),1100),('drone-who-2',(4,3),1100),('drone-who-3',(4,3),1100),('drone-who-4',(4,3),1100)]
 DR_PORT=[('drone-exp3',(3,4),1000),('drone-ride-1',(3,4),1000),('drone-ride-3',(3,4),1000),
- ('drone-ride-5',(3,4),1000),('drone-ride-6',(3,4),1000),('drone-ride-7',(3,4),1000),('drone-ride-8',(3,4),1000)]
+ ('drone-ride-5',(3,4),1000),('drone-ride-6',(3,4),1000),('drone-ride-7',(3,4),1000),('drone-ride-8',(3,4),1000),
+ ('drone-ride-10',(3,4),1000),('drone-ride-12',(3,4),1000),('drone-ride-14',(3,4),1000)]
 for i,(name,r,w) in enumerate(DR_LAND): slot(sorted(land)[i%len(land)],r,w,name)
 for i,(name,r,w) in enumerate(DR_PORT): slot(sorted(port)[i%len(port)],r,w,name)
 print("SLOTS drone:",len(DR_LAND)+len(DR_PORT))
