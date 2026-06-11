@@ -316,13 +316,19 @@ html,body{margin:0}
   letter-spacing:.03em;line-height:1;color:var(--cb-white);font-size:clamp(1.8rem,5vw,4rem);max-width:18ch}
 
 /* ── Galerie AUTO (slides aléatoires) — remplace les bandeaux photo ────────── */
-.cb-slideshow{position:relative;min-height:62vh;min-height:62svh;overflow:hidden;background:var(--cb-espresso)}
-.cb-slideshow__stage{position:absolute;inset:0;z-index:0}
-.cb-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.5s ease;will-change:opacity}
-.cb-slide.cb-slide--on{opacity:1}
-.cb-slideshow__veil{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(20,18,15,.05),rgba(20,18,15,.22))}
-@media(prefers-reduced-motion:reduce){.cb-slide{transition:none}}
-@media(max-width:768px){.cb-slideshow{min-height:48vh;min-height:48svh}}
+.cb-mosaic{position:relative;min-height:60vh;min-height:60svh;overflow:hidden;background:var(--cb-espresso)}
+.cb-mosaic__fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.cb-mosaic__grid{position:absolute;inset:0;z-index:1;display:grid;grid-template-columns:repeat(5,1fr);grid-auto-rows:1fr;gap:3px;opacity:0;transition:opacity .6s ease}
+.cb-mosaic.cb-on .cb-mosaic__grid{opacity:1}
+@media(max-width:1100px){.cb-mosaic__grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:760px){.cb-mosaic__grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.cb-mosaic__grid{grid-template-columns:repeat(2,1fr)}}
+.cb-mtile{position:relative;overflow:hidden;background:#1a1712}
+.cb-mtile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s ease;will-change:opacity}
+.cb-mtile img.cb-on{opacity:1}
+.cb-mosaic__veil{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(20,18,15,.04),rgba(20,18,15,.14))}
+@media(prefers-reduced-motion:reduce){.cb-mtile img{transition:none}}
+@media(max-width:768px){.cb-mosaic{min-height:46vh;min-height:46svh}}
 
 /* ── Section EXPÉRIENCE (image-led, défilement normal — aucun scroll bloquant) ── */
 .cb-exp__intro{max-width:44ch}
@@ -596,11 +602,10 @@ html,body{margin:0}
 
   <!-- ══════════════════ 3 · GALERIE AUTO #1 (slides aléatoires) ══════════════════
        MEDIA_SLIDE_1 = image de repli (no-JS) ; le JS enchaîne des slides aléatoires du pool medias/web/pool/ -->
-  <section class="cb-slideshow cb-bleed cb-ink-on" data-cb-slideshow aria-label="Le golfe et les riders en images — défilement automatique">
-    <div class="cb-slideshow__stage">
-      <img class="cb-fill cb-slide cb-slide--on" src="medias/web/breath-sunset.webp" width="1920" height="1080" loading="lazy" decoding="async" alt="Vue drone : des riders en eFoil sur le golfe au coucher du soleil.">
-    </div>
-    <div class="cb-slideshow__veil"></div>
+  <section class="cb-mosaic cb-bleed cb-ink-on" data-cb-mosaic aria-label="Galerie en mosaïque — défilement automatique">
+    <img class="cb-mosaic__fallback" src="medias/web/breath-sunset.webp" width="1920" height="1080" loading="lazy" decoding="async" alt="Vue drone : des riders en eFoil sur le golfe au coucher du soleil.">
+    <div class="cb-mosaic__grid" aria-hidden="true"></div>
+    <div class="cb-mosaic__veil"></div>
   </section>
 
   <!-- ══════════════════ 4 · L'EXPÉRIENCE (image-led, défilement normal) ══════════════════
@@ -756,11 +761,10 @@ html,body{margin:0}
 
   <!-- ══════════════════ 9 · GALERIE AUTO #2 (slides aléatoires) ══════════════════
        MEDIA_SLIDE_2 = image de repli (no-JS) ; slides aléatoires du pool -->
-  <section class="cb-slideshow cb-bleed cb-ink-on" data-cb-slideshow aria-label="Le golfe et les riders en images — défilement automatique">
-    <div class="cb-slideshow__stage">
-      <img class="cb-fill cb-slide cb-slide--on" src="medias/web/breath-golfe.webp" width="1920" height="1080" loading="lazy" decoding="async" alt="Riders en vol au-dessus du golfe.">
-    </div>
-    <div class="cb-slideshow__veil"></div>
+  <section class="cb-mosaic cb-bleed cb-ink-on" data-cb-mosaic aria-label="Galerie en mosaïque — défilement automatique">
+    <img class="cb-mosaic__fallback" src="medias/web/breath-golfe.webp" width="1920" height="1080" loading="lazy" decoding="async" alt="Riders en vol au-dessus du golfe.">
+    <div class="cb-mosaic__grid" aria-hidden="true"></div>
+    <div class="cb-mosaic__veil"></div>
   </section>
 
   <!-- ══════════════════ 9 bis · LE BEACH CLUB (juste avant les avis) ══════════════════
@@ -992,7 +996,7 @@ html,body{margin:0}
 }
 </script>
 
-<script>window.CB_POOL=["medias/web/pool/auto-aw-02.webp", "medias/web/pool/auto-aw-06.webp", "medias/web/pool/auto-aw-10.webp", "medias/web/pool/auto-aw-14.webp", "medias/web/pool/auto-aw-18.webp", "medias/web/pool/auto-aw-22.webp", "medias/web/pool/auto-aw-26.webp", "medias/web/pool/auto-aw-30.webp", "medias/web/pool/auto-aw-34.webp", "medias/web/pool/auto-aw-38.webp", "medias/web/pool/auto-aw-42.webp", "medias/web/pool/auto-aw-46.webp", "medias/web/pool/auto-aw-50.webp", "medias/web/pool/auto-aw-54.webp", "medias/web/pool/auto-aw-58.webp", "medias/web/pool/auto-fo-02.webp", "medias/web/pool/auto-fo-05.webp", "medias/web/pool/auto-fo-08.webp", "medias/web/pool/auto-fo-11.webp", "medias/web/pool/auto-fo-14.webp", "medias/web/pool/auto-fo-17.webp", "medias/web/pool/auto-fo-20.webp", "medias/web/pool/auto-pu-02.webp", "medias/web/pool/auto-pu-05.webp", "medias/web/pool/auto-pu-08.webp", "medias/web/pool/auto-pu-11.webp", "medias/web/pool/auto-pu-14.webp", "medias/web/pool/auto-pu-17.webp", "medias/web/pool/auto-res-03.webp", "medias/web/pool/auto-res-09.webp", "medias/web/pool/auto-res-15.webp", "medias/web/pool/auto-res-21.webp", "medias/web/pool/auto-res-27.webp", "medias/web/pool/auto-res-39.webp", "medias/web/pool/auto-res-45.webp", "medias/web/pool/auto-res-51.webp", "medias/web/pool/auto-res-57.webp", "medias/web/pool/auto-res-63.webp", "medias/web/pool/auto-to-02.webp", "medias/web/pool/auto-to-05.webp", "medias/web/pool/auto-to-08.webp", "medias/web/pool/auto-to-11.webp", "medias/web/pool/auto-to-14.webp", "medias/web/pool/auto-ve-03.webp", "medias/web/pool/auto-ve-09.webp", "medias/web/pool/auto-ve-15.webp", "medias/web/pool/auto-ve-21.webp", "medias/web/pool/auto-ve-27.webp", "medias/web/pool/auto-ve-33.webp", "medias/web/pool/auto-ve-39.webp", "medias/web/pool/auto-ve-45.webp", "medias/web/pool/auto-ve-51.webp", "medias/web/pool/auto-ve-57.webp", "medias/web/pool/cannes-cannes-cote-103.webp", "medias/web/pool/cannes-cannes-cote-109.webp", "medias/web/pool/cannes-cannes-cote-110.webp", "medias/web/pool/cannes-cannes-cote-118.webp", "medias/web/pool/cannes-cannes-cote-120.webp", "medias/web/pool/cannes-cannes-cote-125.webp", "medias/web/pool/cannes-cannes-cote-126.webp", "medias/web/pool/cannes-cannes-cote-129.webp", "medias/web/pool/cannes-cannes-cote-131.webp", "medias/web/pool/cannes-cannes-cote-134.webp", "medias/web/pool/cannes-cannes-cote-135.webp", "medias/web/pool/cannes-cannes-cote-146.webp", "medias/web/pool/cannes-cannes-cote-153.webp", "medias/web/pool/cannes-cannes-cote-155.webp", "medias/web/pool/cannes-cannes-cote-161.webp", "medias/web/pool/cannes-cannes-cote-162.webp", "medias/web/pool/cannes-cannes-cote-164.webp", "medias/web/pool/cannes-cannes-cote-167.webp", "medias/web/pool/cannes-cannes-cote-172.webp", "medias/web/pool/cannes-cannes-cote-173.webp", "medias/web/pool/cannes-cannes-cote-177.webp", "medias/web/pool/cannes-cannes-cote-180.webp", "medias/web/pool/cannes-cannes-cote-182.webp", "medias/web/pool/cannes-cannes-cote-184.webp", "medias/web/pool/cannes-cannes-cote-187.webp", "medias/web/pool/cannes-cannes-cote-189.webp", "medias/web/pool/cannes-cannes-cote-190.webp", "medias/web/pool/cannes-cannes-cote-194.webp", "medias/web/pool/cannes-cannes-cote-2.webp", "medias/web/pool/cannes-cannes-cote-22.webp", "medias/web/pool/cannes-cannes-cote-3.webp", "medias/web/pool/cannes-cannes-cote-30.webp", "medias/web/pool/cannes-cannes-cote-36.webp", "medias/web/pool/cannes-cannes-cote-4.webp", "medias/web/pool/cannes-cannes-cote-45.webp", "medias/web/pool/cannes-cannes-cote-50.webp", "medias/web/pool/cannes-cannes-cote-53.webp", "medias/web/pool/cannes-cannes-cote-56.webp", "medias/web/pool/cannes-cannes-cote-57.webp", "medias/web/pool/cannes-cannes-cote-58.webp", "medias/web/pool/cannes-cannes-cote-61.webp", "medias/web/pool/cannes-cannes-cote-64.webp", "medias/web/pool/cannes-cannes-cote-73.webp", "medias/web/pool/cannes-cannes-cote-83-1.webp", "medias/web/pool/cannes-cannes-cote-83.webp", "medias/web/pool/cannes-cannes-cote-85.webp", "medias/web/pool/cannes-cannes-cote-86.webp", "medias/web/pool/cannes-cannes-cote-90.webp", "medias/web/pool/cannes-cannes-cote-94.webp", "medias/web/pool/cannes-cannes-cote-96.webp", "medias/web/pool/cannes-cannes-cote-99.webp", "medias/web/pool/cannes-cannes-day1-2.webp", "medias/web/pool/cannes-cannes-day1-4.webp", "medias/web/pool/como-beauvallon-19a1d93b-24c7-4ce7-8e34-fc634e6ce764.webp", "medias/web/pool/como-beauvallon-6f9dea10-981b-4b23-8fde-4a21f87acd52.webp", "medias/web/pool/como-beauvallon-a715426f-04a3-4407-abce-65a7dffb1f08.webp", "medias/web/pool/esterel-post-4x5-5-1.webp", "medias/web/pool/esterel-post-4x5-5.webp", "medias/web/pool/iles-lerins-post-4x5-24-three.webp", "medias/web/pool/iles-lerins-post-4x5-25-secondd.webp", "medias/web/pool/iles-lerins-post-4x5-26-first.webp", "medias/web/pool/saint-tropez-stropez-day2-11.webp", "medias/web/pool/saint-tropez-stropez-day2-7.webp"];</script>
+<script>window.CB_POOL=["medias/web/pool/medias_cannes_cannes_cote_109_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_118_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_120_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_125_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_126_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_129_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_131_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_134_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_135_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_146_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_153_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_155_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_161_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_167_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_177_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_180_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_182_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_189_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_190_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_194_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_2_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_30_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_36_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_3_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_45_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_4_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_50_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_53_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_56_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_57_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_58_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_61_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_64_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_73_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_83_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_85_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_86_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_90_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_94_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_96_jpg.webp", "medias/web/pool/medias_cannes_cannes_cote_99_jpg.webp", "medias/web/pool/medias_cannes_cannes_day1_2_jpg.webp", "medias/web/pool/medias_cannes_cannes_day1_4_jpg.webp", "medias/web/pool/medias_como_beauvallon_19a1d93b_24c7_4ce7_8e34_fc634e6ce764_jpg.webp", "medias/web/pool/medias_como_beauvallon_6f9dea10_981b_4b23_8fde_4a21f87acd52_jpg.webp", "medias/web/pool/medias_como_beauvallon_a715426f_04a3_4407_abce_65a7dffb1f08_jpg.webp", "medias/web/pool/medias_como_web_raw_acc1_jpg.webp", "medias/web/pool/medias_como_web_raw_dining1_jpg.webp", "medias/web/pool/medias_como_web_raw_exp2_jpg.webp", "medias/web/pool/medias_como_web_raw_hero_jpg.webp", "medias/web/pool/medias_como_web_raw_location_jpg.webp", "medias/web/pool/medias_como_web_raw_wellness_jpg.webp", "medias/web/pool/medias_esterel_post_4x5_5_jpg.webp", "medias/web/pool/medias_iles_lerins_post_4x5_24_three_jpg.webp", "medias/web/pool/medias_iles_lerins_post_4x5_25_secondd_jpg.webp", "medias/web/pool/medias_iles_lerins_post_4x5_26_first_jpg.webp", "medias/web/pool/medias_saint_tropez_stropez_day2_11_jpg.webp", "medias/web/pool/medias_saint_tropez_stropez_day2_7_jpg.webp", "medias/web/pool/medias_video_frames_auto_aw_02_jpg.webp", "medias/web/pool/medias_video_frames_auto_aw_06_jpg.webp", "medias/web/pool/medias_video_frames_auto_aw_10_jpg.webp", "medias/web/pool/medias_video_frames_auto_aw_14_jpg.webp", "medias/web/pool/medias_video_frames_auto_aw_18_jpg.webp", "medias/web/pool/medias_video_frames_auto_aw_22_jpg.webp", "medias/web/pool/medias_video_frames_auto_aw_30_jpg.webp", "medias/web/pool/medias_video_frames_auto_aw_34_jpg.webp", "medias/web/pool/medias_video_frames_auto_aw_38_jpg.webp", "medias/web/pool/medias_video_frames_auto_aw_42_jpg.webp", "medias/web/pool/medias_video_frames_auto_aw_46_jpg.webp", "medias/web/pool/medias_video_frames_auto_aw_58_jpg.webp", "medias/web/pool/medias_video_frames_auto_fo_05_jpg.webp", "medias/web/pool/medias_video_frames_auto_pu_14_jpg.webp", "medias/web/pool/medias_video_frames_auto_res_09_jpg.webp", "medias/web/pool/medias_video_frames_auto_res_15_jpg.webp", "medias/web/pool/medias_video_frames_auto_res_33_jpg.webp", "medias/web/pool/medias_video_frames_auto_res_39_jpg.webp", "medias/web/pool/medias_video_frames_auto_res_57_jpg.webp", "medias/web/pool/medias_video_frames_auto_res_63_jpg.webp", "medias/web/pool/medias_video_frames_auto_to_02_jpg.webp", "medias/web/pool/medias_video_frames_auto_to_08_jpg.webp", "medias/web/pool/medias_video_frames_auto_ve_03_jpg.webp", "medias/web/pool/medias_video_frames_auto_ve_39_jpg.webp", "medias/web/pool/medias_video_frames_awaking_65_jpg.webp", "medias/web/pool/medias_video_frames_drone_aw_005_0_jpg.webp", "medias/web/pool/medias_video_frames_drone_aw_006_6_jpg.webp", "medias/web/pool/medias_video_frames_drone_aw_017_0_jpg.webp", "medias/web/pool/medias_video_frames_drone_aw_018_6_jpg.webp", "medias/web/pool/medias_video_frames_drone_aw_023_4_jpg.webp", "medias/web/pool/medias_video_frames_drone_aw_034_6_jpg.webp", "medias/web/pool/medias_video_frames_drone_aw_035_4_jpg.webp", "medias/web/pool/medias_video_frames_drone_aw_040_2_jpg.webp", "medias/web/pool/medias_video_frames_drone_aw_042_6_jpg.webp", "medias/web/pool/medias_video_frames_drone_aw_043_4_jpg.webp", "medias/web/pool/medias_video_frames_drone_aw_044_2_jpg.webp", "medias/web/pool/medias_video_frames_esp_torre_65_jpg.webp", "medias/web/pool/medias_video_frames_resume_65_jpg.webp"];</script>
 <!-- ══ GSAP + ScrollTrigger (lib d'animation, defer). Fallback : si le CDN est bloqué,
         l'init révèle tout le contenu. Pour 100% self-host : télécharger en /vendor/. ══ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
@@ -1022,7 +1026,7 @@ html,body{margin:0}
     initYear();
     initInkObserver();
     initAutoplayVideo();
-    initSlideshow();
+    initMosaic();
 
     var REDUCED=!(window.matchMedia&&matchMedia('(prefers-reduced-motion: no-preference)').matches);
     var GSAP=window.gsap, ST=window.ScrollTrigger;
@@ -1105,27 +1109,40 @@ html,body{margin:0}
       try{ v.muted=true; var p=v.play(); if(p&&p.catch) p.catch(function(){}); }catch(e){}
     });
   }
-  /* Galerie auto : enchaîne des slides aléatoires du pool (window.CB_POOL) en crossfade.
-     Repli no-JS / reduced-motion = la 1re image (de repli) reste affichée. */
-  function initSlideshow(){
+  /* Mosaïque auto : une grille de tuiles ; une tuile au hasard change vite (crossfade).
+     Repli no-JS = l'image de repli. reduced-motion = mosaïque statique (pas de swap). */
+  function cbShuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function initMosaic(){
     var pool=(window.CB_POOL||[]);
-    var boxes=document.querySelectorAll('[data-cb-slideshow]'); if(!boxes.length||!pool.length) return;
-    if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: no-preference)').matches)) return;
+    var boxes=document.querySelectorAll('[data-cb-mosaic]'); if(!boxes.length||!pool.length) return;
+    var REDUCED=!(window.matchMedia&&matchMedia('(prefers-reduced-motion: no-preference)').matches);
     boxes.forEach(function(box,bi){
-      var stage=box.querySelector('.cb-slideshow__stage'); if(!stage) return;
-      var first=stage.querySelector('.cb-slide'); if(!first) return;
-      var order=pool.slice();
-      for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;}
-      var layerB=document.createElement('img');
-      layerB.className='cb-slide'; layerB.alt=''; layerB.decoding='async'; layerB.loading='lazy';
-      stage.appendChild(layerB);
-      var cur=first, nxt=layerB, idx=0, visible=true;
-      function swap(){ nxt.classList.add('cb-slide--on'); cur.classList.remove('cb-slide--on'); var t=cur;cur=nxt;nxt=t; }
-      function step(){ idx=(idx+1)%order.length; nxt.onload=swap; nxt.onerror=function(){}; nxt.src=order[idx]; if(nxt.complete&&nxt.naturalWidth) swap(); }
-      setInterval(function(){ if(visible) step(); }, 4800+bi*900);
-      if('IntersectionObserver' in window){
-        new IntersectionObserver(function(es){ visible=es[0].isIntersecting; },{threshold:0.01}).observe(box);
+      var grid=box.querySelector('.cb-mosaic__grid'); if(!grid) return;
+      var bag=cbShuffle(pool.slice()), bagI=0;
+      function pick(){ if(bagI>=bag.length){cbShuffle(bag);bagI=0;} return bag[bagI++]; }
+      var tiles=[], visible=true, timer=null;
+      function build(){
+        var cols=getComputedStyle(grid).gridTemplateColumns.split(' ').length||4;
+        var n=cols*2; grid.innerHTML=''; tiles=[];
+        for(var i=0;i<n;i++){
+          var t=document.createElement('div'); t.className='cb-mtile';
+          var a=document.createElement('img'); a.loading='lazy'; a.decoding='async'; a.alt=''; a.className='cb-on'; a.src=pick();
+          var b=document.createElement('img'); b.loading='lazy'; b.decoding='async'; b.alt='';
+          t.appendChild(a); t.appendChild(b); grid.appendChild(t); tiles.push({cur:a,nxt:b});
+        }
+        box.classList.add('cb-on');
       }
+      build();
+      if(REDUCED) return;                 // mosaïque statique
+      timer=setInterval(function(){
+        if(!visible||!tiles.length) return;
+        var T=tiles[Math.floor(Math.random()*tiles.length)];
+        T.nxt.onload=function(){ T.nxt.classList.add('cb-on'); T.cur.classList.remove('cb-on'); var x=T.cur;T.cur=T.nxt;T.nxt=x; };
+        T.nxt.onerror=function(){}; T.nxt.src=pick();
+        if(T.nxt.complete&&T.nxt.naturalWidth) T.nxt.onload();
+      }, 1100+bi*250);
+      if('IntersectionObserver' in window) new IntersectionObserver(function(es){visible=es[0].isIntersecting;},{threshold:0.01}).observe(box);
+      var rt; window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(build,400);});
     });
   }
 

@@ -26,7 +26,7 @@ def img_media(name, ratio, alt):
             f'width="{w}" height="{h}" loading="lazy" decoding="async" alt="{esc(alt)}">')
 def slide_fallback(name, alt):
     w,h=dims(name)
-    return (f'<img class="cb-fill cb-slide cb-slide--on" src="medias/web/{name}.webp" '
+    return (f'<img class="cb-mosaic__fallback" src="medias/web/{name}.webp" '
             f'width="{w}" height="{h}" loading="lazy" decoding="async" alt="{esc(alt)}">')
 def video_fill(alt):
     w,h=dims('hero-video-poster')
