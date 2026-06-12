@@ -19,7 +19,7 @@
 
 <!--
   ════════════════════════════════════════════════════════════════════════════
-  Landing « La Croix-Valmer / Gigaro » — ÉDITION ORANGE (identité efoilcotedazur).
+  Landing « La Croix-Valmer / Gigaro » — ÉDITIONS ORANGE ⇄ BLEU sur une SEULE page (bascule de couleur), identité efoilcotedazur.
   DA hybride : hero cinématique full-bleed + système de marque EFCA
   (Inter, orange #F4631F + turquoise #00A7C7, boutons pilule, rating bar, vagues).
   Imagerie : 100 % VUES AÉRIENNES (curation efca-photo-tri.json → medias/web/cv/).
@@ -43,7 +43,7 @@ html,body{margin:0}
 
 <style>
 /* ════════════════════════════════════════════════════════════════════════════
-   eFoil · La Croix-Valmer — ÉDITION ORANGE (namespace .cvx-, zéro sélecteur global)
+   eFoil · La Croix-Valmer — ORANGE (défaut) ⇄ BLEU via [data-theme] (namespace .cvx-, zéro sélecteur global)
    ════════════════════════════════════════════════════════════════════════════ */
 .cvx-root{
   /* — Tokens de marque EFCA (orange) — */
@@ -75,6 +75,21 @@ html,body{margin:0}
 .cvx-root h1,.cvx-root h2,.cvx-root h3{line-height:1.08;letter-spacing:-.02em;color:var(--ink);font-weight:900}
 .cvx-root ::selection{background:var(--p);color:#fff}
 .cvx-root :focus-visible{outline:3px solid var(--p);outline-offset:2px;border-radius:var(--radius-xs)}
+
+/* — Bascule de thème : ORANGE (défaut) ⇄ BLEU — surcharge des tokens de marque — */
+.cvx-root[data-theme="bleu"]{
+  --p:#0892A5;--p-hover:#0A7F90;--p-border:#0A6C7A;
+  --acc:#F4631F;--acc-deep:#C44A0F;
+  --glow:0 6px 18px rgba(8,146,165,.34);
+}
+.cvx-themetgl{display:inline-flex;align-items:center;gap:.5rem;border:2px solid currentColor;background:transparent;color:#fff;
+  font-family:var(--ff);font-weight:700;font-size:.82rem;letter-spacing:.02em;cursor:pointer;line-height:1;
+  padding:.5rem .9rem;border-radius:var(--pill);transition:background-color .25s var(--ease),color .25s var(--ease)}
+.cvx-header--solid .cvx-themetgl{color:var(--ink)}
+.cvx-themetgl:hover{background:rgba(255,255,255,.14)}
+.cvx-header--solid .cvx-themetgl:hover{background:rgba(15,40,48,.07)}
+.cvx-themetgl__dot{width:.95rem;height:.95rem;border-radius:50%;background:var(--acc);box-shadow:0 0 0 2px rgba(255,255,255,.55);transition:background-color .25s var(--ease)}
+.cvx-themetgl__txt b{font-weight:800;text-transform:capitalize}
 
 .cvx-container{width:100%;max-width:var(--wrap);margin-inline:auto;padding-inline:var(--px)}
 .cvx-section{padding-block:clamp(3rem,7vw,6.5rem)}
@@ -314,7 +329,7 @@ html,body{margin:0}
 }
 </style>
 
-<div class="cvx-root" id="cvx-top">
+<div class="cvx-root" id="cvx-top" data-theme="orange">
 
   <!-- ═══════ HEADER ═══════ -->
   <header class="cvx-header" id="cvx-header">
@@ -322,16 +337,21 @@ html,body{margin:0}
       <img src="assets/img/logo.webp" alt="" width="140" height="80" onerror="this.style.display='none'">
       <span class="cvx-logo-text"><i>e</i><b>Foil</b> Côte d'Azur</span>
     </a>
-    <a class="cvx-btn cvx-btn--primary cvx-header__cta" href="#cvx-book">Réserver</a>
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <button class="cvx-themetgl" id="cvx-theme-btn" type="button" aria-label="Changer la couleur du thème (orange ou bleu)">
+        <span class="cvx-themetgl__dot" aria-hidden="true"></span><span class="cvx-themetgl__txt">Thème&nbsp;<b id="cvx-theme-label">bleu</b></span>
+      </button>
+      <a class="cvx-btn cvx-btn--primary cvx-header__cta" href="#cvx-book">Réserver</a>
+    </div>
   </header>
 
   <!-- ═══════ 1 · HERO ═══════ -->
   <section class="cvx-hero" aria-label="La Croix-Valmer — plage de Gigaro">
     <div class="cvx-hero__media">
       <picture>
-        <source media="(max-width:768px)" srcset="medias/web/cv/hero-orange-v.webp">
-        <img src="medias/web/cv/hero-orange.webp" width="1920" height="1080" fetchpriority="high" decoding="async"
-             alt="Vue aérienne au couchant : eaux translucides et rochers du littoral, sud du golfe de Saint-Tropez.">
+        <source id="cvx-hero-src" media="(max-width:768px)" srcset="medias/web/cv/hero-orange-v.webp">
+        <img id="cvx-hero-img" src="medias/web/cv/hero-orange.webp" width="1920" height="1080" fetchpriority="high" decoding="async"
+             alt="Vue aérienne : eaux translucides et littoral du sud du golfe de Saint-Tropez.">
       </picture>
     </div>
     <div class="cvx-container cvx-hero__inner">
@@ -638,6 +658,28 @@ html,body{margin:0}
     rail.addEventListener('pointerup',up);rail.addEventListener('pointercancel',up);
     rail.addEventListener('click',function(e){if(moved)e.preventDefault();},true);
   }
+
+  /* — Bascule de thème ORANGE ⇄ BLEU (persistée, swap du hero) — */
+  (function(){
+    var btn=document.getElementById('cvx-theme-btn'),label=document.getElementById('cvx-theme-label');
+    var himg=document.getElementById('cvx-hero-img'),hsrc=document.getElementById('cvx-hero-src');
+    var meta=document.querySelector('meta[name="theme-color"]');
+    var T={orange:{color:'#F4631F',next:'bleu',img:'medias/web/cv/hero-orange.webp',v:'medias/web/cv/hero-orange-v.webp'},
+           bleu:{color:'#0892A5',next:'orange',img:'medias/web/cv/hero-bleu.webp',v:'medias/web/cv/hero-bleu-v.webp'}};
+    function apply(t,swap){
+      var d=T[t]||T.orange; root.setAttribute('data-theme',t);
+      if(label) label.textContent=d.next;
+      if(meta) meta.setAttribute('content',d.color);
+      if(swap){ if(himg) himg.src=d.img; if(hsrc) hsrc.srcset=d.v; }
+      try{localStorage.setItem('cvxTheme',t);}catch(e){}
+    }
+    var saved; try{saved=localStorage.getItem('cvxTheme');}catch(e){}
+    if(saved&&T[saved]&&saved!==root.getAttribute('data-theme')) apply(saved,true);
+    else apply(root.getAttribute('data-theme')||'orange',false);
+    if(btn) btn.addEventListener('click',function(){
+      apply((root.getAttribute('data-theme')||'orange')==='orange'?'bleu':'orange',true);
+    });
+  })();
 })();
 </script>
 <!-- ═══════════════════ ===== BLOC wp:html — FIN ===== ═══════════════════ -->
