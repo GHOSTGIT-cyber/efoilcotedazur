@@ -66,21 +66,34 @@ footer{position:sticky;bottom:0;background:rgba(21,19,15,.97);border-top:1px sol
     <span class="hint">Choisis un pinceau (categorie) puis clique les vignettes pour les taguer. Multi-tags OK. Double-clic = agrandir. Sauvegarde auto.</span></div>
 </header>
 <main><div class="grid" id="grid"></div></main>
-<div class="lightbox" id="lb"><img id="lbimg" alt=""><div class="cap" id="lbcap"></div></div>
+<div class="lightbox" id="lb"><img id="lbimg" alt=""><div class="cap" id="lbcap" style="bottom:98px"></div><textarea id="lbnote" placeholder="Annoter cette photo (optionnel) — sauvegarde auto" style="position:fixed;left:50%;bottom:40px;transform:translateX(-50%);width:min(92vw,560px);height:50px;background:#1d1a15;color:#f2ead9;border:1px solid #4a4234;border-radius:6px;padding:8px 10px;font:13px system-ui;resize:none"></textarea></div>
 <footer id="foot"></footer>
 <script>
 var PHOTOS = /*__MANIFEST__*/;
-/* Catégories = SECTIONS de la page (chaque photo va dans son "dossier" / sa section) */
-var DEFCATS=[{id:'hero',name:'Heros',c:'#f4c542'},{id:'lieu',name:'Le lieu / chateau',c:'#46a6b8'},
- {id:'beach',name:'Beach club',c:'#e8c33e'},{id:'exp',name:'Experience',c:'#5fbf6a'},
- {id:'deroule',name:'Deroule / pedagogue',c:'#5a8fd6'},{id:'galerie',name:'Galerie',c:'#d4603f'},
- {id:'whoq',name:'Pour qui',c:'#c98a3a'},{id:'spot',name:'Le spot (aerien)',c:'#39c0c8'},
- {id:'mosaic',name:'Mosaique (fond)',c:'#a784d8'},{id:'top',name:'Pepite',c:'#f0823c'},
+/* Catégories = EMPLACEMENTS exacts (slots) de la page — chaque photo va à un endroit précis */
+var DEFCATS=[
+ {id:'hero',name:'Heros (poster video)',c:'#f4c542'},
+ {id:'lieu',name:'Le lieu / chateau',c:'#46a6b8'},
+ {id:'beach1',name:'Beach — aerien',c:'#39c0c8'},
+ {id:'beach2',name:'Beach — parasols',c:'#e8c33e'},
+ {id:'exp1',name:'Exp. Le silence',c:'#5fbf6a'},
+ {id:'exp2',name:'Exp. Apesanteur',c:'#73c98a'},
+ {id:'exp3',name:'Exp. A votre rythme',c:'#9fd6a8'},
+ {id:'who1',name:'Pour qui 1 debutant',c:'#c98a3a'},
+ {id:'who2',name:'Pour qui 2 confirme',c:'#d6a45a'},
+ {id:'who3',name:'Pour qui 3 encadrement',c:'#e0bd7a'},
+ {id:'who4',name:'Pour qui 4 materiel',c:'#b87a2a'},
+ {id:'d1',name:'Deroule 1 briefing',c:'#5a8fd6'},
+ {id:'d2',name:'Deroule 2 equipement',c:'#6f9fe0'},
+ {id:'d3',name:'Deroule 3 a l-eau',c:'#86b0e8'},
+ {id:'d4',name:'Deroule 4 le vol',c:'#a0c2ee'},
+ {id:'spot',name:'Le spot (aerien hotel)',c:'#2fb0a0'},
+ {id:'defile',name:'Galerie / defile auto',c:'#a784d8'},
  {id:'proscrire',name:'A proscrire',c:'#8a8a8a'}];
-var LS='efcaTri2_';
+var LS='efcaTri3_';
 function load(k,d){try{var v=JSON.parse(localStorage.getItem(LS+k));return v==null?d:v}catch(e){return d}}
-function persist(){localStorage.setItem(LS+'assign',JSON.stringify(assign));localStorage.setItem(LS+'cats',JSON.stringify(cats));}
-var cats=load('cats',DEFCATS.slice()),assign=load('assign',{}),brush=cats[0].id,filter='all';
+function persist(){localStorage.setItem(LS+'assign',JSON.stringify(assign));localStorage.setItem(LS+'cats',JSON.stringify(cats));localStorage.setItem(LS+'notes',JSON.stringify(notes));}
+var cats=load('cats',DEFCATS.slice()),assign=load('assign',{}),notes=load('notes',{}),brush=cats[0].id,filter='all',lbCur=null;
 function catById(id){for(var i=0;i<cats.length;i++)if(cats[i].id===id)return cats[i];return {id:id,name:id,c:'#999'}}
 function groups(){var s={};PHOTOS.forEach(function(p){s[p.g]=(s[p.g]||0)+1});return s}
 function render(){
@@ -115,15 +128,16 @@ function tag(id,t){var a=assign[id]||[],i=a.indexOf(brush);if(i<0)a.push(brush);
   render()}
 function updateStats(){document.getElementById('stats').textContent='— '+PHOTOS.length+' vignettes, '+Object.keys(assign).length+' taguees';
   document.getElementById('foot').textContent='Touches 1-9 = changer de pinceau. Filtre par categorie/groupe pour verifier tes packs. Exporte le JSON et envoie-le moi.'}
-function openLb(p){document.getElementById('lbimg').src=p.t;document.getElementById('lbcap').textContent=p.id;document.getElementById('lb').classList.add('show')}
-document.getElementById('lb').onclick=function(){this.classList.remove('show')};
+function openLb(p){lbCur=p.id;document.getElementById('lbimg').src=p.t;document.getElementById('lbcap').textContent=p.id;document.getElementById('lbnote').value=notes[p.id]||'';document.getElementById('lb').classList.add('show')}
+document.getElementById('lb').onclick=function(e){if(e.target.id==='lbnote')return;this.classList.remove('show')};
+document.getElementById('lbnote').addEventListener('input',function(){if(!lbCur)return;if(this.value.trim())notes[lbCur]=this.value;else delete notes[lbCur];persist()});
 document.getElementById('addcat').onclick=function(){var v=document.getElementById('newcat').value.trim();if(!v)return;
   var id=v.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,24)||('c'+cats.length);
   if(!catById(id).name||catById(id).name===id){if(!cats.some(function(c){return c.id===id})){var pal=['#e0a92e','#39c0c8','#d4603f','#5fbf6a','#a784d8','#5a8fd6','#e8c33e','#f0823c'];cats.push({id:id,name:v,c:pal[cats.length%pal.length]})}}
   document.getElementById('newcat').value='';brush=id;persist();render()};
 document.getElementById('export').onclick=function(){var packs={};cats.forEach(function(c){packs[c.id]=[]});
   Object.keys(assign).forEach(function(id){(assign[id]||[]).forEach(function(c){(packs[c]=packs[c]||[]).push(id)})});
-  var out={categories:cats.map(function(c){return {id:c.id,name:c.name}}),packs:packs,assignments:assign,total:PHOTOS.length};
+  var out={categories:cats.map(function(c){return {id:c.id,name:c.name}}),packs:packs,assignments:assign,notes:notes,total:PHOTOS.length};
   var b=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='efca-photo-tri.json';a.click()};
 document.getElementById('import').onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();
   r.onload=function(){try{var d=JSON.parse(r.result);if(d.assignments)assign=d.assignments;if(d.categories)d.categories.forEach(function(c){if(!cats.some(function(x){return x.id===c.id}))cats.push({id:c.id,name:c.name,c:'#e0a92e'})});persist();render()}catch(err){alert('JSON invalide')}};r.readAsText(f)};
