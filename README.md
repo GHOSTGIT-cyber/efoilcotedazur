@@ -1,3 +1,19 @@
+<p align="center">
+  <img src=".github/readme/banner.svg" alt="eFoil Côte d&#x27;Azur" width="100%">
+</p>
+
+> Refonte one-page en HTML, CSS et JavaScript purs — WordPress neutralisé sur cette page : zéro builder, zéro Gutenberg.
+
+![HTML](https://img.shields.io/badge/HTML-0B1A2A?style=flat-square&labelColor=0B1A2A&color=1E3A52) ![CSS](https://img.shields.io/badge/CSS-0B1A2A?style=flat-square&labelColor=0B1A2A&color=1E3A52) ![JAVASCRIPT](https://img.shields.io/badge/JAVASCRIPT-0B1A2A?style=flat-square&labelColor=0B1A2A&color=1E3A52) ![WORDPRESS](https://img.shields.io/badge/WORDPRESS-0B1A2A?style=flat-square&labelColor=0B1A2A&color=1E3A52)
+
+<p align="center">
+  <a href="https://efoilcotedazur.fr"><img src=".github/readme/screenshot.jpg" alt="Capture de eFoil Côte d&#x27;Azur" width="100%"></a>
+</p>
+
+**Statut** — 🟢 En production sur [efoilcotedazur.fr](https://efoilcotedazur.fr)
+
+---
+
 # efoilcotedazur.fr — one-page HTML pur
 
 Refonte one-page de la base de location eFoil de Mandelieu, en **HTML/CSS/JS pur**
